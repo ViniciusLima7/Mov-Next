@@ -1,51 +1,27 @@
-import { useState, useEffect, useContext } from 'react';
-import { ChallengesContext } from '../contexts/ChallengesContext';
+
+import { useContext } from 'react';
+import { CountdownContext } from '../contexts/CountdownContext';
 import styles from '../styles/components/Countdown.module.css'
 
-let countdownTimeout: NodeJS.Timeout;
 
 export function Countdown() {
 
-    const { startNewChallenge } = useContext(ChallengesContext)
-
-    const [time, SetTime] = useState(0.1 * 60);
-    const [isActive, SetIsActive] = useState(false);
-    const [hasFinished, SetHasFinished] = useState(false);
-
-
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
+    const {
+        minutes,
+        seconds,
+        hasFinished,
+        isActive,
+        startCountdown,
+        resetCountdown } = useContext(CountdownContext)
 
     // --padstart ele verifica se tem duas variaveis e caso tenha menos que 2 vai colocar 0 na esquerda
     // --split divide a variavel por caractere se eu não colocar marcadador ele dividi cada um
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
     const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
-    function startCountdown() {
 
-        SetIsActive(true);
-    }
-
-
-    function resetCountdown() {
-        clearTimeout(countdownTimeout);
-        SetIsActive(false);
-        SetTime(0.1 * 60);
-    }
     // --parametros useEffect = função e valor
-    useEffect(() => {
 
-        if (isActive && time > 0) {
-            countdownTimeout = setTimeout(() => {
-                SetTime(time - 1);
-            }, 1000)
-        } else if (isActive && time === 0) {
-            SetHasFinished(true);
-            SetIsActive(false);
-            startNewChallenge();
-        }
-        // console.log(active);  --verificar como esta no navegador aba console
-    }, [isActive, time])
     return (
         <div>
             <div className={styles.countdownContainer}>
