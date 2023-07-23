@@ -4,13 +4,13 @@
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/marcos-vinicius-lima/)](https://www.linkedin.com/in/marcos-vinicius-lima/)
 
 <h1 align="center">
-    <img alt="BLINDESVIDROS" title="Projeto" src="https://github.com/ViniciusLima7/Mov-Next/blob/master/src/assets/capa.png" />
+    <img alt="Capa" title="Projeto" src="https://github.com/ViniciusLima7/Mov-Next/blob/master/src/assets/newcapa.png" />
 </h1>
 
 # 💻 Projeto
 
-Mova- se no Trabalho é um projeto baseado na técnica de Pomodoro, trazendo foco e sáude ao mesmo tempo, nos intervalos te obrigando a fazer pequenos exercicios para manter uma qualidade de vida.
-Projeto criado para ter foco e sáude.
+Mova- se no Trabalho é um projeto baseado na técnica de Pomodoro, trazendo foco e saúde ao mesmo tempo, nos intervalos te obrigando a fazer pequenos exercicios para manter uma qualidade de vida.
+Projeto criado para ter Alta Produtividade e saúde.
 
 ## 🛠 Tecnologias Usadas :heart_eyes:
 
