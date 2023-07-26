@@ -1,5 +1,4 @@
 import {
-  Children,
   createContext,
   ReactNode,
   useContext,
@@ -12,6 +11,7 @@ interface CountdownContextData {
   minutes: number;
   seconds: number;
   hasFinished: boolean;
+  isRestTime: boolean;
   isActive: boolean;
   startCountdown: () => void;
   resetCountdown: () => void;
@@ -28,35 +28,46 @@ let countdownTimeout: NodeJS.Timeout;
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
-  const [time, SetTime] = useState(25 * 60);
-  const [isActive, SetIsActive] = useState(false);
-  const [hasFinished, SetHasFinished] = useState(false);
+  const [time, setTime] = useState(0.2 * 60);
+  const [isActive, setIsActive] = useState(false);
+  const [hasFinished, setHasFinished] = useState(false);
+  const [isRestTime, setIsRestTime] = useState(false);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
   function startCountdown() {
-    SetIsActive(true);
+    setIsActive(true);
   }
 
   function resetCountdown() {
     clearTimeout(countdownTimeout);
-    SetIsActive(false);
-    SetHasFinished(false);
-    SetTime(25 * 60);
+    setIsActive(false);
+    if (isRestTime && hasFinished) {
+      setTime(0.4 * 60);
+    } else {
+      setHasFinished(false);
+      setTime(0.2 * 60);
+    }
+  }
+
+  function toggleRestTime() {
+    setIsRestTime((prevState) => !prevState);
+    setTime(0.4 * 60);
   }
 
   useEffect(() => {
     if (isActive && time > 0) {
       countdownTimeout = setTimeout(() => {
-        SetTime(time - 1);
+        setTime(time - 1);
       }, 1000);
-    } else if (isActive && time === 0) {
-      SetHasFinished(true);
-      SetIsActive(false);
+    } else if (isRestTime) {
       startNewChallenge();
+    } else if (isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
+      toggleRestTime();
     }
-    // console.log(active);  --verificar como esta no navegador aba console
   }, [isActive, time]);
 
   return (
@@ -65,6 +76,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         minutes,
         seconds,
         hasFinished,
+        isRestTime,
         isActive,
         startCountdown,
         resetCountdown,
