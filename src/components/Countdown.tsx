@@ -11,6 +11,7 @@ export function Countdown() {
     isActive,
     startCountdown,
     resetCountdown,
+    resetCountdownRest,
   } = useContext(CountdownContext);
 
   // --padstart ele verifica se tem duas variaveis e caso tenha menos que 2 vai colocar 0 na esquerda
@@ -38,22 +39,18 @@ export function Countdown() {
       {hasFinished ? (
         isRestTime && isActive && !isTimerZero ? (
           <button
-            onClick={resetCountdown}
+            onClick={resetCountdownRest}
             className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
           >
             Abandonar Descanso
           </button>
-        ) : isRestTime && !isTimerZero ? (
-          <button onClick={startCountdown} className={styles.countdownButton}>
-            Iniciar Descanso
+        ) : isTimerZero ? (
+          <button disabled className={styles.countdownButton}>
+            Ciclo Encerrado
           </button>
         ) : (
-          <button
-            disabled
-            onClick={startCountdown}
-            className={styles.countdownButton}
-          >
-            Ciclo Encerrado
+          <button onClick={startCountdown} className={styles.countdownButton}>
+            Iniciar Descanso
           </button>
         )
       ) : (

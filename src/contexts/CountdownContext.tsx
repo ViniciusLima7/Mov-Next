@@ -15,6 +15,7 @@ interface CountdownContextData {
   isActive: boolean;
   startCountdown: () => void;
   resetCountdown: () => void;
+  resetCountdownRest: () => void;
 }
 
 interface CountdownProviderProps {
@@ -43,12 +44,15 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   function resetCountdown() {
     clearTimeout(countdownTimeout);
     setIsActive(false);
-    if (isRestTime && hasFinished) {
-      setTime(0.4 * 60);
-    } else {
-      setHasFinished(false);
-      setTime(0.2 * 60);
-    }
+    setHasFinished(false);
+    setIsRestTime(false);
+    setTime(0.2 * 60);
+  }
+
+  function resetCountdownRest() {
+    clearTimeout(countdownTimeout);
+    setIsActive(false);
+    setTime(0.4 * 60);
   }
 
   function toggleRestTime() {
@@ -80,6 +84,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         isActive,
         startCountdown,
         resetCountdown,
+        resetCountdownRest,
       }}
     >
       {children}
