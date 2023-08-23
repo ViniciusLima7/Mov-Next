@@ -29,7 +29,7 @@ let countdownTimeout: NodeJS.Timeout;
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
-  const [time, setTime] = useState(0.2 * 60);
+  const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
   const [isRestTime, setIsRestTime] = useState(false);
@@ -46,18 +46,18 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setIsActive(false);
     setHasFinished(false);
     setIsRestTime(false);
-    setTime(0.2 * 60);
+    setTime(25 * 60);
   }
 
   function resetCountdownRest() {
     clearTimeout(countdownTimeout);
     setIsActive(false);
-    setTime(0.4 * 60);
+    setTime(4.5 * 60);
   }
 
   function toggleRestTime() {
     setIsRestTime((prevState) => !prevState);
-    setTime(0.4 * 60);
+    setTime(4.5 * 60);
   }
 
   useEffect(() => {
@@ -65,12 +65,13 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
-    } else if (isRestTime) {
-      startNewChallenge();
     } else if (isActive && time === 0) {
       setHasFinished(true);
       setIsActive(false);
       toggleRestTime();
+    } else if (!isActive && !isRestTime && hasFinished) {
+      setTime(0);
+      startNewChallenge();
     }
   }, [isActive, time]);
 
