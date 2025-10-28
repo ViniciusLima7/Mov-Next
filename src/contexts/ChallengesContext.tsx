@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useState, ReactNode, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import challenges from '../../challenges.json';
@@ -17,7 +19,7 @@ interface ChallengesContextData {
     currentExperience: number;
     challengesCompleted: number;
     startNewChallenge: () => void;
-    activeChallenge: Challenge;
+    activeChallenge: Challenge | null;
     reseteChallenge: () => void;
     experienceToNextLevel: number;
     completeChallenge: () => void;
@@ -42,7 +44,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
     const [currentExperience, setCurrenteExperience] = useState(rest.currentExperience ?? 0);
     const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);
 
-    const [activeChallenge, SetActiveChallenge] = useState(null);
+    const [activeChallenge, SetActiveChallenge] = useState<Challenge | null>(null);
     const [isLevelUpModalOpen, SetIsLevelUpModalOpen] = useState(false);
 
 
@@ -56,7 +58,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
     useEffect(() => {
         Cookies.set('level', String(level));
-        Cookies.set('currentExperience', currentExperience.toString);
+        Cookies.set('currentExperience', String(currentExperience));
         Cookies.set('challengesCompleted', String(challengesCompleted));
 
     }, [level, currentExperience, challengesCompleted])
@@ -72,7 +74,7 @@ export function ChallengesProvider({ children, ...rest }: ChallengesProviderProp
 
     function startNewChallenge() {
         const randomChallengeIndex = Math.floor(Math.random() * challenges.length)
-        const challenge = challenges[randomChallengeIndex];
+        const challenge = challenges[randomChallengeIndex] as Challenge;
 
         SetActiveChallenge(challenge);
 

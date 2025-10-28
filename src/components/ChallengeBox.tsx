@@ -1,3 +1,5 @@
+"use client";
+
 import { useContext } from "react";
 import { ChallengesContext } from "../contexts/ChallengesContext";
 import { CountdownContext } from "../contexts/CountdownContext";
@@ -25,7 +27,7 @@ export function ChallengeBox() {
           <header>Ganhe {activeChallenge.amount} xp</header>
 
           <main>
-            <img src={`icons/${activeChallenge.type}.svg`}></img>
+            <img src={`icons/${activeChallenge.type}.svg`} alt="Desafio" />
             <strong>Novo Desafio</strong>
             <p>{activeChallenge.description}</p>
           </main>
