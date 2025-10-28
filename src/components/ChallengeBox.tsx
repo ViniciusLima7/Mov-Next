@@ -1,3 +1,5 @@
+"use client";
+
 import { useContext } from "react";
 import { ChallengesContext } from "../contexts/ChallengesContext";
 import { CountdownContext } from "../contexts/CountdownContext";
