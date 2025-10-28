@@ -11,6 +11,8 @@ export function Countdown() {
     hasFinished,
     isRestTime,
     isActive,
+    pomodoroCount,
+    isLongBreak,
     startCountdown,
     resetCountdown,
     resetCountdownRest,
@@ -24,6 +26,20 @@ export function Countdown() {
 
   return (
     <div>
+      {/* Pomodoro Counter */}
+      {!isRestTime && (
+        <div style={{ textAlign: "center", marginBottom: "1rem", fontSize: "1.2rem", fontWeight: 600 }}>
+          🍅 Pomodoro {pomodoroCount + 1}/4
+        </div>
+      )}
+
+      {/* Rest Time Indicator */}
+      {isRestTime && (
+        <div style={{ textAlign: "center", marginBottom: "1rem", fontSize: "1.2rem", fontWeight: 600 }}>
+          {isLongBreak ? "☕ Pausa Longa (15 min)" : "☕ Pausa Curta (5 min)"}
+        </div>
+      )}
+
       <div className={styles.countdownContainer}>
         <div>
           <span>{minuteLeft}</span>
@@ -38,23 +54,21 @@ export function Countdown() {
         </div>
       </div>
 
-      {hasFinished ? (
-        isRestTime && isActive && !isTimerZero ? (
-          <button
-            onClick={resetCountdownRest}
-            className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
-          >
-            Abandonar Descanso
-          </button>
-        ) : isTimerZero ? (
-          <button disabled className={styles.countdownButton}>
-            Ciclo Encerrado
-          </button>
-        ) : (
-          <button onClick={startCountdown} className={styles.countdownButton}>
-            Iniciar Descanso
-          </button>
-        )
+      {isRestTime ? (
+        <>
+          {isActive ? (
+            <button
+              onClick={resetCountdownRest}
+              className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+            >
+              Abandonar Descanso
+            </button>
+          ) : (
+            <button onClick={startCountdown} className={styles.countdownButton}>
+              {isLongBreak ? "Iniciar Pausa Longa" : "Iniciar Pausa Curta"}
+            </button>
+          )}
+        </>
       ) : (
         <>
           {isActive ? (
@@ -63,7 +77,7 @@ export function Countdown() {
               className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
               onClick={resetCountdown}
             >
-              Abandonar Ciclo
+              Abandonar Pomodoro
             </button>
           ) : (
             <button
@@ -71,7 +85,7 @@ export function Countdown() {
               className={styles.countdownButton}
               onClick={startCountdown}
             >
-              Iniciar Ciclo
+              Iniciar Pomodoro
             </button>
           )}
         </>
