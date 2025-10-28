@@ -33,7 +33,7 @@ let countdownTimeout: NodeJS.Timeout;
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
-  const [time, setTime] = useState(1 * 10);
+  const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
   const [isRestTime, setIsRestTime] = useState(false);
@@ -53,7 +53,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setHasFinished(false);
     setIsRestTime(false);
     setIsLongBreak(false);
-    setTime(1 * 10);
+    setTime(25 * 60);
   }
 
   function resetCountdownRest() {
@@ -62,7 +62,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setHasFinished(false);
     setIsRestTime(false);
     setIsLongBreak(false);
-    setTime(1 * 10);
+    setTime(25 * 60);
   }
 
   function startRestTime() {
@@ -78,7 +78,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     } else {
       // Pausa curta de 5 minutos
       setIsLongBreak(false);
-      setTime(1 * 5);
+      setTime(5 * 60);
     }
 
     setIsRestTime(true);
@@ -97,7 +97,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setIsRestTime(false);
     setIsLongBreak(false);
     setHasFinished(false);
-    setTime(1 * 10);
+    setTime(25 * 60);
     startNewChallenge();
   }
 

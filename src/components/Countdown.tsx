@@ -28,14 +28,28 @@ export function Countdown() {
     <div>
       {/* Pomodoro Counter */}
       {!isRestTime && (
-        <div style={{ textAlign: "center", marginBottom: "1rem", fontSize: "1.2rem", fontWeight: 600 }}>
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "1rem",
+            fontSize: "1.2rem",
+            fontWeight: 600,
+          }}
+        >
           🍅 Pomodoro {pomodoroCount + 1}/4
         </div>
       )}
 
       {/* Rest Time Indicator */}
       {isRestTime && (
-        <div style={{ textAlign: "center", marginBottom: "1rem", fontSize: "1.2rem", fontWeight: 600 }}>
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "1rem",
+            fontSize: "1.2rem",
+            fontWeight: 600,
+          }}
+        >
           {isLongBreak ? "☕ Pausa Longa (15 min)" : "☕ Pausa Curta (5 min)"}
         </div>
       )}
