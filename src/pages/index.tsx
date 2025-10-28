@@ -2,6 +2,7 @@ import Head from 'next/head';
 
 import { GetServerSideProps } from 'next';
 import { ChallengeBox } from '../components/ChallengeBox';
+import { cookies } from 'next/headers';
 
 
 
@@ -53,20 +54,18 @@ export default function Home(props: HomeProps) {
 }
 
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+  const cookieStore = await cookies();
+  const level = cookieStore.get('level')?.value;
+  const currentExperience = cookieStore.get('currentExperience')?.value;
+  const challengesCompleted = cookieStore.get('challengesCompleted')?.value;
+
   return {
-
-
     props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
-
+      level: Number(level) || 1,
+      currentExperience: Number(currentExperience) || 0,
+      challengesCompleted: Number(challengesCompleted) || 0
     }
-
   }
-
-
 }
