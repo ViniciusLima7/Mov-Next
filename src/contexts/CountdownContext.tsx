@@ -30,7 +30,8 @@ interface CountdownProviderProps {
 export const CountdownContext = createContext({} as CountdownContextData);
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
-  const { startNewChallenge } = useContext(ChallengesContext);
+  const { startNewChallenge, activeChallenge, reseteChallenge } =
+    useContext(ChallengesContext);
 
   const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
@@ -46,6 +47,10 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const seconds = time % 60;
 
   function startCountdown() {
+    if (activeChallenge) {
+      reseteChallenge();
+    }
+
     startTimeRef.current = Date.now();
     durationRef.current = time;
     setIsActive(true);
