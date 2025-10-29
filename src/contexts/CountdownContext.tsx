@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useRef,
 } from "react";
 import { ChallengesContext } from "./ChallengesContext";
 
@@ -28,8 +29,6 @@ interface CountdownProviderProps {
 
 export const CountdownContext = createContext({} as CountdownContextData);
 
-let countdownTimeout: NodeJS.Timeout;
-
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
@@ -40,15 +39,19 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const [pomodoroCount, setPomodoroCount] = useState(0); // 0-4 pomodoros
   const [isLongBreak, setIsLongBreak] = useState(false);
 
+  const startTimeRef = useRef<number>(0);
+  const durationRef = useRef<number>(25 * 60);
+
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
   function startCountdown() {
+    startTimeRef.current = Date.now();
+    durationRef.current = time;
     setIsActive(true);
   }
 
   function resetCountdown() {
-    clearTimeout(countdownTimeout);
     setIsActive(false);
     setHasFinished(false);
     setIsRestTime(false);
@@ -57,7 +60,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }
 
   function resetCountdownRest() {
-    clearTimeout(countdownTimeout);
     setIsActive(false);
     setHasFinished(false);
     setIsRestTime(false);
@@ -66,13 +68,10 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }
 
   function startRestTime() {
-    // Incrementa contador de pomodoros quando termina um ciclo de trabalho
     const newPomodoroCount = pomodoroCount + 1;
     setPomodoroCount(newPomodoroCount);
 
-    // Decide se é pausa curta ou longa
     if (newPomodoroCount >= 4) {
-      // Pausa longa de 15 minutos
       setIsLongBreak(true);
       setTime(15 * 60);
     } else {
@@ -87,12 +86,10 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }
 
   function completeRestTime() {
-    // Se completou pausa longa, reseta contador de pomodoros
     if (isLongBreak) {
       setPomodoroCount(0);
     }
 
-    // Para o timer para não iniciar automaticamente
     setIsActive(false);
     setIsRestTime(false);
     setIsLongBreak(false);
@@ -102,18 +99,35 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }
 
   useEffect(() => {
-    if (isActive && time > 0) {
-      countdownTimeout = setTimeout(() => {
-        setTime(time - 1);
-      }, 1000);
-    } else if (isActive && time === 0 && !isRestTime) {
-      // Terminou um pomodoro de trabalho - inicia pausa
-      startRestTime();
-    } else if (isActive && time === 0 && isRestTime) {
-      // Terminou uma pausa - volta pro trabalho
-      completeRestTime();
+    let intervalId: NodeJS.Timeout;
+
+    if (isActive) {
+      intervalId = setInterval(() => {
+        const elapsedTime = Math.floor(
+          (Date.now() - startTimeRef.current) / 1000
+        );
+        const newTime = Math.max(0, durationRef.current - elapsedTime);
+
+        setTime(newTime);
+
+        if (newTime === 0) {
+          clearInterval(intervalId);
+
+          if (!isRestTime) {
+            startRestTime();
+          } else {
+            completeRestTime();
+          }
+        }
+      }, 100);
     }
-  }, [isActive, time, isRestTime]);
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [isActive, isRestTime]);
 
   return (
     <CountdownContext.Provider
