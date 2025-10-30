@@ -6,9 +6,13 @@ import { CompletedChallenges } from "../components/CompletedChallenges";
 import { Countdown } from "../components/Countdown";
 import { ExperienceBar } from "../components/ExperienceBar";
 import { Profile } from "../components/Profile";
+import { ProfileSetupModal } from "../components/ProfileSetupModal";
 import { CountdownProvider } from "../contexts/CountdownContext";
+import { UserProvider } from "../contexts/UserContext";
 import styles from "../styles/pages/Home.module.css";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 interface HomeClientProps {
   level: number;
@@ -16,17 +20,12 @@ interface HomeClientProps {
   challengesCompleted: number;
 }
 
-export function HomeClient({
-  level,
-  currentExperience,
-  challengesCompleted,
-}: HomeClientProps) {
+function HomeContent() {
+  const { isFirstVisit } = useContext(UserContext);
+
   return (
-    <ChallengesProvider
-      level={level}
-      currentExperience={currentExperience}
-      challengesCompleted={challengesCompleted}
-    >
+    <>
+      {isFirstVisit && <ProfileSetupModal />}
       <div className={styles.container}>
         <Head>
           <title>Inicio | Mov-Next</title>
@@ -47,7 +46,24 @@ export function HomeClient({
           </section>
         </CountdownProvider>
       </div>
-    </ChallengesProvider>
+    </>
   );
 }
 
+export function HomeClient({
+  level,
+  currentExperience,
+  challengesCompleted,
+}: HomeClientProps) {
+  return (
+    <UserProvider>
+      <ChallengesProvider
+        level={level}
+        currentExperience={currentExperience}
+        challengesCompleted={challengesCompleted}
+      >
+        <HomeContent />
+      </ChallengesProvider>
+    </UserProvider>
+  );
+}
