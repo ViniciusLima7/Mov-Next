@@ -20,7 +20,9 @@ export function Profile() {
   const [hasCustomAvatar, setHasCustomAvatar] = useState(false);
 
   function generateFallbackAvatar(name: string): string {
-    return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=120&background=5965E0&color=fff&bold=true`;
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      name
+    )}&size=120&background=5965E0&color=fff&bold=true`;
   }
 
   useEffect(() => {
@@ -32,8 +34,23 @@ export function Profile() {
   function handleEditClick() {
     setEditName(name);
     setEditAvatarUrl(avatarUrl);
-    setEditGithubUsername(githubUsername);
-    setHasCustomAvatar(false);
+    const isUsingInitials = avatarUrl.includes("ui-avatars.com");
+    setHasCustomAvatar(!isUsingInitials);
+
+    if (isUsingInitials) {
+      setEditGithubUsername("");
+      setEditCustomUrl("");
+      setActiveTab("github");
+    } else if (githubUsername) {
+      setEditGithubUsername(githubUsername);
+      setEditCustomUrl("");
+      setActiveTab("github");
+    } else {
+      setEditGithubUsername("");
+      setEditCustomUrl(avatarUrl);
+      setActiveTab("url");
+    }
+
     setError("");
     setIsEditing(true);
   }
@@ -110,7 +127,9 @@ export function Profile() {
     }
 
     const finalAvatarUrl = editAvatarUrl || generateFallbackAvatar(editName);
-    const finalGithubUsername = editAvatarUrl && activeTab === "github" ? editGithubUsername : "";
+    const isUsingInitials = finalAvatarUrl.includes("ui-avatars.com");
+    const finalGithubUsername =
+      !isUsingInitials && activeTab === "github" ? editGithubUsername : "";
 
     updateUser(editName, finalAvatarUrl, finalGithubUsername);
     setIsEditing(false);
@@ -170,12 +189,16 @@ export function Profile() {
 
             <div className={styles.inputGroup}>
               <label>Foto de perfil (opcional)</label>
-              <p className={styles.helpText}>💡 Sem foto? Usaremos suas iniciais</p>
-              
+              <p className={styles.helpText}>
+                💡 Sem foto? Usaremos suas iniciais
+              </p>
+
               <div className={styles.tabs}>
                 <button
                   type="button"
-                  className={activeTab === "github" ? styles.tabActive : styles.tab}
+                  className={
+                    activeTab === "github" ? styles.tabActive : styles.tab
+                  }
                   onClick={() => {
                     setActiveTab("github");
                     setError("");
@@ -185,7 +208,9 @@ export function Profile() {
                 </button>
                 <button
                   type="button"
-                  className={activeTab === "url" ? styles.tabActive : styles.tab}
+                  className={
+                    activeTab === "url" ? styles.tabActive : styles.tab
+                  }
                   onClick={() => {
                     setActiveTab("url");
                     setError("");
@@ -221,10 +246,7 @@ export function Profile() {
                     onChange={(e) => setEditCustomUrl(e.target.value)}
                     placeholder="https://exemplo.com/foto.jpg"
                   />
-                  <button
-                    type="button"
-                    onClick={handleUseCustomUrl}
-                  >
+                  <button type="button" onClick={handleUseCustomUrl}>
                     Usar
                   </button>
                 </div>
@@ -233,8 +255,8 @@ export function Profile() {
 
             {editAvatarUrl && (
               <div className={styles.avatarPreview}>
-                <img 
-                  src={editAvatarUrl} 
+                <img
+                  src={editAvatarUrl}
                   alt="Preview"
                   onError={handleImageError}
                 />

@@ -100,8 +100,9 @@ export function ProfileSetupModal() {
     }
 
     const finalAvatarUrl = avatarUrl || generateFallbackAvatar(name);
+    const isUsingInitials = finalAvatarUrl.includes("ui-avatars.com");
     const finalGithubUsername =
-      avatarUrl && activeTab === "github" ? githubUsername : "";
+      !isUsingInitials && activeTab === "github" ? githubUsername : "";
 
     updateUser(name, finalAvatarUrl, finalGithubUsername);
     completeSetup();
