@@ -86,6 +86,13 @@
   font-size: 0.875rem;
 }
 
+.helpText {
+  font-size: 0.8125rem;
+  color: var(--text);
+  margin: 0.25rem 0 0.5rem 0;
+  font-style: italic;
+}
+
 .inputGroup input {
   height: 3rem;
   padding: 0 1rem;
@@ -99,6 +106,50 @@
 .inputGroup input:focus {
   outline: none;
   border-color: var(--blue);
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid var(--gray-line);
+  margin-bottom: 0.75rem;
+}
+
+.tab {
+  flex: 1;
+  height: 2.75rem;
+  background: var(--white);
+  color: var(--text);
+  border: 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-right: 1px solid var(--gray-line);
+}
+
+.tab:last-child {
+  border-right: 0;
+}
+
+.tab:hover {
+  background: var(--gray-line);
+}
+
+.tabActive {
+  flex: 1;
+  height: 2.75rem;
+  background: var(--blue);
+  color: var(--white);
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  border-right: 1px solid var(--blue);
+}
+
+.tabActive:last-child {
+  border-right: 0;
 }
 
 .githubInput {
