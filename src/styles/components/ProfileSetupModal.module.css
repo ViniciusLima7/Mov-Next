@@ -1,83 +1,65 @@
-.profileContainer {
-  display: flex;
-  align-items: center;
-}
-
-.profileContainer > img {
-  width: 5.5rem;
-  height: 5.5rem;
-  border-radius: 50%;
-}
-
-.profileContainer > div {
-  margin-left: 1.5rem;
-  flex: 1;
-}
-
-.profileContainer div strong {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--title);
-}
-
-.profileContainer div p {
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-
-.profileContainer div p img {
-  margin-right: 0.5rem;
-}
-
-.editButton {
-  background: transparent;
-  border: 0;
-  font-size: 1.5rem;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-  padding: 0.5rem;
-  margin-left: 1rem;
-}
-
-.editButton:hover {
-  opacity: 1;
-}
-
-.editModal {
+.overlay {
+  background: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
 
-.editModalContent {
+.container {
   background: var(--white);
-  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+  padding: 3rem;
   border-radius: 8px;
-  width: 90%;
-  max-width: 400px;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.editModalContent h3 {
-  font-size: 1.5rem;
+.container header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.container header img {
+  height: 3rem;
+}
+
+.container strong {
+  font-size: 2rem;
+  font-weight: 600;
   color: var(--title);
-  margin: 0;
+  line-height: 1.4;
+}
+
+.container p {
+  font-size: 1.125rem;
+  color: var(--text);
+  margin-top: -0.5rem;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  text-align: left;
 }
 
 .inputGroup label {
@@ -101,6 +83,7 @@
   background: var(--white);
   font-size: 1rem;
   color: var(--title);
+  transition: border-color 0.2s;
 }
 
 .inputGroup input:focus {
@@ -161,7 +144,7 @@
   flex: 1;
 }
 
-.githubInput button {
+.fetchButton {
   height: 3rem;
   padding: 0 1.5rem;
   background: var(--blue);
@@ -174,47 +157,13 @@
   white-space: nowrap;
 }
 
-.githubInput button:hover:not(:disabled) {
+.fetchButton:hover:not(:disabled) {
   background: var(--blue-dark);
 }
 
-.githubInput button:disabled {
+.fetchButton:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-.modalButtons {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.modalButtons button {
-  flex: 1;
-  height: 3rem;
-  border: 0;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.modalButtons button:first-child {
-  background: var(--blue);
-  color: var(--white);
-}
-
-.modalButtons button:first-child:hover {
-  background: var(--blue-dark);
-}
-
-.modalButtons button:last-child {
-  background: var(--gray-line);
-  color: var(--title);
-}
-
-.modalButtons button:last-child:hover {
-  background: var(--text-highlight);
 }
 
 .avatarPreview {
@@ -233,8 +182,8 @@
 }
 
 .avatarPreview span {
-  color: var(--text);
-  font-weight: 500;
+  color: var(--green);
+  font-weight: 600;
   font-size: 0.875rem;
 }
 
@@ -243,4 +192,26 @@
   font-size: 0.875rem;
   font-weight: 600;
   margin-top: 0;
+}
+
+.submitButton {
+  height: 3.5rem;
+  background: var(--blue);
+  color: var(--white);
+  border: 0;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: var(--blue-dark);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
