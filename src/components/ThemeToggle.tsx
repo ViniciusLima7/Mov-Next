@@ -14,7 +14,9 @@ export function ThemeToggle() {
       className={styles.themeToggle}
       onClick={toggleTheme}
       title={
-        theme === "light" ? t("theme.toggleTooltipLight") : t("theme.toggleTooltipDark")
+        theme === "light"
+          ? t("theme.toggleTooltipLight")
+          : t("theme.toggleTooltipDark")
       }
     >
       <div className={styles.toggleTrack}>
