@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "../styles/global.css";
 
 export const metadata: Metadata = {
-  title: "Mov-Next",
-  description: "Pomodoro app with challenges",
+  title: "FitPomo - Work Focused, Break Fit",
+  description:
+    "Pomodoro timer with fitness challenges. Stay productive with 25-minute work cycles and active health breaks.",
 };
 
 export default function RootLayout({

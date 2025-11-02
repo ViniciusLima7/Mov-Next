@@ -34,17 +34,17 @@ export function Countdown() {
     if (isActive) {
       if (isRestTime) {
         const breakType = isLongBreak ? "☕" : "☕";
-        document.title = `${timeString} ${breakType} - Mov-Next`;
+        document.title = `${timeString} ${breakType} - FitPomo`;
       } else {
-        document.title = `${timeString} 🍅 - Mov-Next`;
+        document.title = `${timeString} 🍅 - FitPomo`;
       }
     } else {
-      document.title = "Mov-Next";
+      document.title = "FitPomo";
     }
 
     // Cleanup: restaura título original quando desmonta
     return () => {
-      document.title = "Mov-Next";
+      document.title = "FitPomo";
     };
   }, [
     minutes,
