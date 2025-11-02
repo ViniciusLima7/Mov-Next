@@ -100,6 +100,38 @@
   "footer": {
     "copyright": "Todos os direitos reservados",
     "developedBy": "Desenvolvido por V7-APPS"
+  },
+  "challengeDescriptions": {
+    "stretch_arm_fingers": "Estique um de seus braços com a palma da mão virada para frente e puxe os dedos para cima por 10 segundos por mão.",
+    "stretch_arm_chest": "Estique seu braço contra o peito e puxe-o utilizando o outro braço por 10 segundos por braço.",
+    "stretch_neck_sides": "Puxe seu pescoço com a ajuda da mão para a direita e para a esquerda, permanecendo na posição por alguns segundos.",
+    "stretch_neck_back": "Com as duas mãos na parte de trás da cabeça, leve-a para baixo, alongando a parte de trás da região.",
+    "stretch_legs_cross": "Cruze as pernas e desça com as mãos esticadas em direção ao chão. Repita o movimento com a outra perna na frente.",
+    "stretch_legs_sitting": "Sentado, abra as pernas e tente encostar as palmas das mãos no chão, repita 3 vezes por 5 segundos.",
+    "stretch_knee_chest": "Puxe o joelho de encontro ao peito e segure, troque de perna após 10 segundos.",
+    "stretch_sitting_twist": "Sentado, cruze uma perna e incline seu tronco à frente, troque de perna após 10 segundos.",
+    "eye_palm_cover": "Sentado, feche os olhos e cubra-os com as palmas da mão durante 2 minutos, depois abra normalmente.",
+    "eye_look_far": "Em algum ambiente aberto, olhe o mais longe que puder em quatro direções por 3s, mexa apenas os olhos. Repita 3 vezes.",
+    "eye_massage_brow": "Usando os polegares, massage a área abaixo das sobrancelhas em movimentos circulares por 15 segundos.",
+    "stretch_waist_twist": "Em pé, gire a cintura o máximo que puder para a esquerda, segure por cinco segundos. Repita para a direita.",
+    "stretch_shoulders_circles": "Sentado, faça movimentos circulares com os ombros para frente 5 vezes, depois para trás 5 vezes.",
+    "stretch_wrist_rotation": "Gire os pulsos em movimentos circulares, 10 vezes para cada lado, ajuda a prevenir lesões por esforço repetitivo.",
+    "breathing_deep": "Inspire profundamente pelo nariz contando até 4, segure por 4 segundos, expire pela boca contando até 4. Repita 3 vezes.",
+    "stretch_back_chair": "Sentado na cadeira, entrelaçe os dedos atrás da cabeça, incline-se para trás alongando as costas, mantenha por 10 segundos.",
+    "eye_blink_exercise": "Pisque rapidamente por 10 segundos, depois feche os olhos e relaxe por 10 segundos. Repita 3 vezes.",
+    "stretch_ankle_rotation": "Sentado, levante um pé e gire o tornozelo 10 vezes em cada direção. Troque de pé e repita.",
+    "posture_correction": "Sente-se ereto, ombros para trás, pés no chão. Mantenha essa postura por 30 segundos respirando normalmente.",
+    "stretch_triceps": "Levante um braço, dobre o cotovelo levando a mão atrás da cabeça. Com a outra mão, puxe o cotovelo. Segure 15 segundos e troque.",
+    "eye_focus_near_far": "Segure o polegar a 25cm dos olhos, foque nele por 5 segundos, depois olhe para algo distante por 5 segundos. Repita 5 vezes.",
+    "stretch_fingers_spread": "Abra e feche as mãos completamente, depois estenda e separe todos os dedos ao máximo. Repita 10 vezes.",
+    "stretch_side_bend": "Sentado, levante um braço acima da cabeça e incline o corpo para o lado oposto. Segure 10 segundos. Troque de lado.",
+    "eye_figure_eight": "Com os olhos, desenhe um número 8 imaginário no ar lentamente. Faça 5 vezes em cada direção.",
+    "stretch_calf_raise": "Em pé, segure em uma cadeira para apoio. Levante-se na ponta dos pés, segure 3 segundos e desça. Repita 15 vezes.",
+    "breathing_box": "Respire contando: inspire (4s), segure (4s), expire (4s), segure (4s). Complete 4 ciclos completos.",
+    "stretch_forearm": "Estenda um braço à frente, palma para cima. Com a outra mão, puxe os dedos para baixo. Segure 15 segundos e troque.",
+    "eye_close_rest": "Feche os olhos suavemente e relaxe completamente os músculos faciais por 1 minuto. Respire calmamente.",
+    "stretch_shoulder_blade": "Entrelaçe os dedos e estenda os braços à frente, empurrando as palmas para fora. Segure 15 segundos.",
+    "stretch_neck_rotation": "Lentamente, gire a cabeça para a direita até sentir alongamento, segure 5 segundos. Repita para esquerda.",
+    "hydration_reminder": "Levante-se e beba um copo de água. Manter-se hidratado é essencial para concentração e saúde!"
   }
 }
-

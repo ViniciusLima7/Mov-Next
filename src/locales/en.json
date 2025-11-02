@@ -100,5 +100,38 @@
   "footer": {
     "copyright": "All rights reserved",
     "developedBy": "Developed by V7-APPS"
+  },
+  "challengeDescriptions": {
+    "stretch_arm_fingers": "Stretch one of your arms with your palm facing forward and pull your fingers up for 10 seconds per hand.",
+    "stretch_arm_chest": "Stretch your arm across your chest and pull it using your other arm for 10 seconds per arm.",
+    "stretch_neck_sides": "Pull your neck with the help of your hand to the right and left, holding the position for a few seconds.",
+    "stretch_neck_back": "With both hands on the back of your head, bring it down, stretching the back of the area.",
+    "stretch_legs_cross": "Cross your legs and go down with your hands stretched towards the floor. Repeat the movement with the other leg in front.",
+    "stretch_legs_sitting": "Sitting down, open your legs and try to touch your palms on the floor, repeat 3 times for 5 seconds.",
+    "stretch_knee_chest": "Pull your knee to your chest and hold, switch legs after 10 seconds.",
+    "stretch_sitting_twist": "Sitting down, cross one leg and lean your torso forward, switch legs after 10 seconds.",
+    "eye_palm_cover": "Sitting down, close your eyes and cover them with the palms of your hands for 2 minutes, then open normally.",
+    "eye_look_far": "In an open environment, look as far as you can in four directions for 3s, move only your eyes. Repeat 3 times.",
+    "eye_massage_brow": "Using your thumbs, massage the area below your eyebrows in circular motions for 15 seconds.",
+    "stretch_waist_twist": "Standing up, twist your waist as much as you can to the left, hold for five seconds. Repeat to the right.",
+    "stretch_shoulders_circles": "Sitting down, make circular movements with your shoulders forward 5 times, then backward 5 times.",
+    "stretch_wrist_rotation": "Rotate your wrists in circular motions, 10 times each direction, helps prevent repetitive strain injuries.",
+    "breathing_deep": "Breathe in deeply through your nose counting to 4, hold for 4 seconds, exhale through your mouth counting to 4. Repeat 3 times.",
+    "stretch_back_chair": "Sitting in the chair, interlace your fingers behind your head, lean back stretching your back, hold for 10 seconds.",
+    "eye_blink_exercise": "Blink rapidly for 10 seconds, then close your eyes and relax for 10 seconds. Repeat 3 times.",
+    "stretch_ankle_rotation": "Sitting down, lift one foot and rotate the ankle 10 times in each direction. Switch feet and repeat.",
+    "posture_correction": "Sit upright, shoulders back, feet on the floor. Maintain this posture for 30 seconds breathing normally.",
+    "stretch_triceps": "Raise one arm, bend the elbow bringing your hand behind your head. With the other hand, pull the elbow. Hold 15 seconds and switch.",
+    "eye_focus_near_far": "Hold your thumb 10 inches from your eyes, focus on it for 5 seconds, then look at something distant for 5 seconds. Repeat 5 times.",
+    "stretch_fingers_spread": "Open and close your hands completely, then extend and spread all fingers to the maximum. Repeat 10 times.",
+    "stretch_side_bend": "Sitting down, raise one arm above your head and lean your body to the opposite side. Hold 10 seconds. Switch sides.",
+    "eye_figure_eight": "With your eyes, draw an imaginary figure 8 in the air slowly. Do 5 times in each direction.",
+    "stretch_calf_raise": "Standing up, hold onto a chair for support. Rise up on your toes, hold 3 seconds and lower. Repeat 15 times.",
+    "breathing_box": "Breathe counting: inhale (4s), hold (4s), exhale (4s), hold (4s). Complete 4 full cycles.",
+    "stretch_forearm": "Extend one arm forward, palm up. With the other hand, pull the fingers down. Hold 15 seconds and switch.",
+    "eye_close_rest": "Close your eyes gently and completely relax your facial muscles for 1 minute. Breathe calmly.",
+    "stretch_shoulder_blade": "Interlace your fingers and extend your arms forward, pushing your palms outward. Hold 15 seconds.",
+    "stretch_neck_rotation": "Slowly, rotate your head to the right until you feel a stretch, hold 5 seconds. Repeat to the left.",
+    "hydration_reminder": "Stand up and drink a glass of water. Staying hydrated is essential for concentration and health!"
   }
 }
