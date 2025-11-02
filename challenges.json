@@ -58,5 +58,100 @@
     "id": "stretch_waist_twist",
     "type": "body",
     "amount": 90
+  },
+  {
+    "id": "stretch_shoulders_circles",
+    "type": "body",
+    "amount": 60
+  },
+  {
+    "id": "stretch_wrist_rotation",
+    "type": "body",
+    "amount": 50
+  },
+  {
+    "id": "breathing_deep",
+    "type": "body",
+    "amount": 70
+  },
+  {
+    "id": "stretch_back_chair",
+    "type": "body",
+    "amount": 80
+  },
+  {
+    "id": "eye_blink_exercise",
+    "type": "eye",
+    "amount": 50
+  },
+  {
+    "id": "stretch_ankle_rotation",
+    "type": "body",
+    "amount": 60
+  },
+  {
+    "id": "posture_correction",
+    "type": "body",
+    "amount": 40
+  },
+  {
+    "id": "stretch_triceps",
+    "type": "body",
+    "amount": 70
+  },
+  {
+    "id": "eye_focus_near_far",
+    "type": "eye",
+    "amount": 80
+  },
+  {
+    "id": "stretch_fingers_spread",
+    "type": "body",
+    "amount": 40
+  },
+  {
+    "id": "stretch_side_bend",
+    "type": "body",
+    "amount": 90
+  },
+  {
+    "id": "eye_figure_eight",
+    "type": "eye",
+    "amount": 100
+  },
+  {
+    "id": "stretch_calf_raise",
+    "type": "body",
+    "amount": 60
+  },
+  {
+    "id": "breathing_box",
+    "type": "body",
+    "amount": 90
+  },
+  {
+    "id": "stretch_forearm",
+    "type": "body",
+    "amount": 60
+  },
+  {
+    "id": "eye_close_rest",
+    "type": "eye",
+    "amount": 50
+  },
+  {
+    "id": "stretch_shoulder_blade",
+    "type": "body",
+    "amount": 80
+  },
+  {
+    "id": "stretch_neck_rotation",
+    "type": "body",
+    "amount": 70
+  },
+  {
+    "id": "hydration_reminder",
+    "type": "body",
+    "amount": 30
   }
 ]
