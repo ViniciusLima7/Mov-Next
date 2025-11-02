@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { CountdownContext } from "../contexts/CountdownContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import styles from "../styles/components/Countdown.module.css";
 
 export function Countdown() {
@@ -17,6 +18,8 @@ export function Countdown() {
     resetCountdown,
     resetCountdownRest,
   } = useContext(CountdownContext);
+
+  const { t } = useContext(LanguageContext);
 
   // --padstart ele verifica se tem duas variaveis e caso tenha menos que 2 vai colocar 0 na esquerda
   // --split divide a variavel por caractere se eu não colocar marcadador ele dividi cada um
@@ -36,7 +39,7 @@ export function Countdown() {
             fontWeight: 600,
           }}
         >
-          🍅 Pomodoro {pomodoroCount + 1}/4
+          {t("pomodoro.count", { count: pomodoroCount + 1 })}
         </div>
       )}
 
@@ -50,7 +53,7 @@ export function Countdown() {
             fontWeight: 600,
           }}
         >
-          {isLongBreak ? "☕ Pausa Longa (15 min)" : "☕ Pausa Curta (5 min)"}
+          {isLongBreak ? t("pomodoro.longBreak") : t("pomodoro.shortBreak")}
         </div>
       )}
 
@@ -75,11 +78,13 @@ export function Countdown() {
               onClick={resetCountdownRest}
               className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
             >
-              Abandonar Descanso
+              {t("pomodoro.abandonBreak")}
             </button>
           ) : (
             <button onClick={startCountdown} className={styles.countdownButton}>
-              {isLongBreak ? "Iniciar Pausa Longa" : "Iniciar Pausa Curta"}
+              {isLongBreak
+                ? t("pomodoro.startLongBreak")
+                : t("pomodoro.startShortBreak")}
             </button>
           )}
         </>
@@ -91,7 +96,7 @@ export function Countdown() {
               className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
               onClick={resetCountdown}
             >
-              Abandonar Ciclo
+              {t("pomodoro.abandonCycle")}
             </button>
           ) : (
             <button
@@ -99,7 +104,7 @@ export function Countdown() {
               className={styles.countdownButton}
               onClick={startCountdown}
             >
-              Iniciar Ciclo
+              {t("pomodoro.startCycle")}
             </button>
           )}
         </>

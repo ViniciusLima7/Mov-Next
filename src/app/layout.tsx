@@ -24,8 +24,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                // Detecta tema
                 const theme = document.cookie.match(/theme=([^;]+)/)?.[1] || 'light';
                 document.documentElement.setAttribute('data-theme', theme);
+                
+                // Detecta idioma
+                const savedLang = document.cookie.match(/language=([^;]+)/)?.[1];
+                const browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+                const supportedLangs = ['pt', 'en', 'es'];
+                const finalLang = savedLang || (supportedLangs.includes(browserLang) ? browserLang : 'en');
+                document.documentElement.setAttribute('lang', finalLang);
               })();
             `,
           }}
