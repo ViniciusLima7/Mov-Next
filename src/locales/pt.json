@@ -1,0 +1,101 @@
+{
+  "common": {
+    "level": "Level",
+    "github": "GitHub",
+    "url": "URL",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "search": "Buscar",
+    "use": "Usar",
+    "close": "Fechar",
+    "continue": "Continuar",
+    "start": "Começar",
+    "loading": "Carregando...",
+    "searching": "Buscando..."
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro",
+    "toggleTooltipLight": "Mudar para tema escuro",
+    "toggleTooltipDark": "Mudar para tema claro"
+  },
+  "profile": {
+    "title": "Perfil",
+    "editProfile": "Editar perfil",
+    "settings": "Configurações",
+    "name": "Nome",
+    "namePlaceholder": "Digite seu nome",
+    "profilePhoto": "Foto de perfil (opcional)",
+    "profilePhotoHelp": "💡 Sem foto? Usaremos suas iniciais",
+    "usernamePlaceholder": "seu-username",
+    "urlPlaceholder": "https://exemplo.com/foto.jpg",
+    "preview": "Preview",
+    "avatarLoaded": "✓ Avatar carregado!",
+    "saveProfile": "Salvar Perfil",
+    "yourProfile": "Seu Perfil",
+    "howToCall": "Como você quer ser chamado?"
+  },
+  "setup": {
+    "welcome": "Bem-vindo!",
+    "subtitle": "Configure seu perfil para começar"
+  },
+  "settings": {
+    "title": "Configurações",
+    "profile": "Perfil",
+    "appearance": "Aparência",
+    "language": "Idioma",
+    "personalizeInfo": "Personalize suas informações de perfil",
+    "personalizeAppearance": "Personalize a aparência da aplicação"
+  },
+  "appearance": {
+    "theme": "Tema",
+    "themeDescription": "Escolha entre o tema claro ou escuro",
+    "tip": "💡 Dica:",
+    "tipDescription": "Você pode alterar essas configurações a qualquer momento clicando no ícone ⚙️ no seu perfil.",
+    "backToProfile": "← Voltar ao Perfil"
+  },
+  "language": {
+    "comingSoon": "🌍 Idioma - Em breve",
+    "comingSoonDescription": "Adicione suporte para múltiplos idiomas",
+    "portuguese": "Português",
+    "english": "English",
+    "spanish": "Español",
+    "selectLanguage": "Selecione o idioma",
+    "chooseLanguage": "Escolha seu idioma preferido"
+  },
+  "pomodoro": {
+    "count": "🍅 Pomodoro {count}/4",
+    "shortBreak": "☕ Pausa Curta (5 min)",
+    "longBreak": "☕ Pausa Longa (15 min)",
+    "startCycle": "Iniciar Ciclo",
+    "abandonCycle": "Abandonar Ciclo",
+    "startShortBreak": "Iniciar Pausa Curta",
+    "startLongBreak": "Iniciar Pausa Longa",
+    "abandonBreak": "Abandonar Descanso"
+  },
+  "challenges": {
+    "completed": "Desafios Completos",
+    "finishCycleToReceive": "Finalize um ciclo para receber um desafio",
+    "advanceLevel": "Avance de level completando desafios",
+    "newChallenge": "Novo Desafio",
+    "earnXp": "Ganhe {amount} xp",
+    "failed": "Falhei",
+    "succeeded": "Completei",
+    "challengeAlt": "Desafio"
+  },
+  "levelUp": {
+    "congratulations": "Parabéns",
+    "reachedNewLevel": "Você Alcançou um novo level.",
+    "closeModal": "fechar Modal"
+  },
+  "errors": {
+    "enterGithubUsername": "Digite um username do GitHub",
+    "githubUserNotFound": "Usuário do GitHub não encontrado",
+    "githubRateLimit": "Limite da API atingido. Tente em {minutes} min. Use a aba URL para continuar.",
+    "enterValidUrl": "Digite uma URL válida",
+    "invalidUrlUsingInitials": "URL inválida. Usando avatar com suas iniciais.",
+    "invalidUrlEnterName": "URL inválida. Digite seu nome para gerar um avatar.",
+    "enterYourName": "Por favor, digite seu nome"
+  }
+}
+

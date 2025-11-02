@@ -2,7 +2,9 @@
 
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageSelector } from "./LanguageSelector";
 import styles from "../styles/components/SettingsModal.module.css";
 
 interface SettingsModalProps {
@@ -13,9 +15,10 @@ interface SettingsModalProps {
 export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const { name, avatarUrl, githubUsername, updateUser } =
     useContext(UserContext);
-  const [activeSection, setActiveSection] = useState<"profile" | "appearance">(
-    "profile"
-  );
+  const { t } = useContext(LanguageContext);
+  const [activeSection, setActiveSection] = useState<
+    "profile" | "appearance" | "language"
+  >("profile");
 
   // Profile states
   const [editName, setEditName] = useState("");
@@ -66,7 +69,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
   async function handleFetchGithubAvatar() {
     if (!editGithubUsername.trim()) {
-      setError("Digite um username do GitHub");
+      setError(t("errors.enterGithubUsername"));
       return;
     }
 
@@ -84,9 +87,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
       if (response.status === 403 && rateLimitRemaining === "0") {
         const resetDate = new Date(Number(rateLimitReset) * 1000);
         const minutes = Math.ceil((resetDate.getTime() - Date.now()) / 60000);
-        setError(
-          `Limite da API atingido. Tente em ${minutes} min. Use a aba URL para continuar.`
-        );
+        setError(t("errors.githubRateLimit", { minutes: minutes.toString() }));
         setActiveTab("url");
         setEditAvatarUrl("");
         return;
@@ -98,11 +99,11 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
         setEditAvatarUrl(githubAvatarUrl);
         setHasCustomAvatar(true);
       } else {
-        setError("Usuário do GitHub não encontrado");
+        setError(t("errors.githubUserNotFound"));
         setEditAvatarUrl("");
       }
     } catch (err) {
-      setError("Usuário do GitHub não encontrado");
+      setError(t("errors.githubUserNotFound"));
       setEditAvatarUrl("");
     } finally {
       setIsLoadingAvatar(false);
@@ -111,7 +112,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
   function handleUseCustomUrl() {
     if (!editCustomUrl.trim()) {
-      setError("Digite uma URL válida");
+      setError(t("errors.enterValidUrl"));
       return;
     }
     setError("");
@@ -122,16 +123,16 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   function handleImageError() {
     if (editName.trim()) {
       setEditAvatarUrl(generateFallbackAvatar(editName));
-      setError("URL inválida. Usando avatar com suas iniciais.");
+      setError(t("errors.invalidUrlUsingInitials"));
     } else {
-      setError("URL inválida. Digite seu nome para gerar um avatar.");
+      setError(t("errors.invalidUrlEnterName"));
       setEditAvatarUrl("");
     }
   }
 
   function handleSave() {
     if (!editName.trim()) {
-      setError("Digite seu nome");
+      setError(t("errors.enterYourName"));
       return;
     }
 
@@ -153,13 +154,14 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     >
       <div className={styles.modal}>
         <div className={styles.header}>
-          <h2>⚙️ Configurações</h2>
+          <h2>⚙️ {t("settings.title")}</h2>
           <button className={styles.closeButton} onClick={onClose}>
             ✕
           </button>
         </div>
 
         <div className={styles.content}>
+          {/* Sidebar Navigation */}
           <nav className={styles.sidebar}>
             <button
               className={`${styles.navButton} ${
@@ -168,7 +170,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               onClick={() => setActiveSection("profile")}
             >
               <span className={styles.navIcon}>👤</span>
-              Perfil
+              {t("settings.profile")}
             </button>
             <button
               className={`${styles.navButton} ${
@@ -177,7 +179,16 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               onClick={() => setActiveSection("appearance")}
             >
               <span className={styles.navIcon}>🎨</span>
-              Aparência
+              {t("settings.appearance")}
+            </button>
+            <button
+              className={`${styles.navButton} ${
+                activeSection === "language" ? styles.active : ""
+              }`}
+              onClick={() => setActiveSection("language")}
+            >
+              <span className={styles.navIcon}>🌍</span>
+              {t("settings.language")}
             </button>
           </nav>
 
@@ -185,25 +196,25 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
           <div className={styles.mainContent}>
             {activeSection === "profile" && (
               <div className={styles.section}>
-                <h3>Perfil</h3>
+                <h3>{t("profile.title")}</h3>
                 <p className={styles.sectionDescription}>
-                  Personalize suas informações de perfil
+                  {t("settings.personalizeInfo")}
                 </p>
 
                 <div className={styles.inputGroup}>
-                  <label>Nome</label>
+                  <label>{t("profile.name")}</label>
                   <input
                     type="text"
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
-                    placeholder="Seu nome"
+                    placeholder={t("profile.namePlaceholder")}
                   />
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>Foto de perfil (opcional)</label>
+                  <label>{t("profile.profilePhoto")}</label>
                   <p className={styles.helpText}>
-                    💡 Sem foto? Usaremos suas iniciais
+                    {t("profile.profilePhotoHelp")}
                   </p>
 
                   <div className={styles.tabs}>
@@ -217,7 +228,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         setError("");
                       }}
                     >
-                      GitHub
+                      {t("common.github")}
                     </button>
                     <button
                       type="button"
@@ -229,7 +240,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         setError("");
                       }}
                     >
-                      URL
+                      {t("common.url")}
                     </button>
                   </div>
 
@@ -239,14 +250,16 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         type="text"
                         value={editGithubUsername}
                         onChange={(e) => setEditGithubUsername(e.target.value)}
-                        placeholder="seu-username"
+                        placeholder={t("profile.usernamePlaceholder")}
                       />
                       <button
                         type="button"
                         onClick={handleFetchGithubAvatar}
                         disabled={isLoadingAvatar}
                       >
-                        {isLoadingAvatar ? "..." : "Buscar"}
+                        {isLoadingAvatar
+                          ? t("common.searching")
+                          : t("common.search")}
                       </button>
                     </div>
                   )}
@@ -257,10 +270,10 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         type="url"
                         value={editCustomUrl}
                         onChange={(e) => setEditCustomUrl(e.target.value)}
-                        placeholder="https://exemplo.com/foto.jpg"
+                        placeholder={t("profile.urlPlaceholder")}
                       />
                       <button type="button" onClick={handleUseCustomUrl}>
-                        Usar
+                        {t("common.use")}
                       </button>
                     </div>
                   )}
@@ -270,42 +283,48 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   <div className={styles.avatarPreview}>
                     <img
                       src={editAvatarUrl}
-                      alt="Preview"
+                      alt={t("profile.preview")}
                       onError={handleImageError}
                     />
-                    <span>Preview</span>
+                    <span>{t("profile.avatarLoaded")}</span>
                   </div>
                 )}
 
                 {error && <p className={styles.error}>{error}</p>}
 
                 <div className={styles.saveButton}>
-                  <button onClick={handleSave}>Salvar Perfil</button>
+                  <button onClick={handleSave}>
+                    {t("profile.saveProfile")}
+                  </button>
                 </div>
               </div>
             )}
 
             {activeSection === "appearance" && (
               <div className={styles.section}>
-                <h3>Aparência</h3>
+                <h3>{t("settings.appearance")}</h3>
                 <p className={styles.sectionDescription}>
-                  Personalize a aparência da aplicação
+                  {t("settings.personalizeAppearance")}
                 </p>
 
                 <div className={styles.themeSection}>
                   <div className={styles.themeInfo}>
-                    <strong>Tema</strong>
-                    <span>Escolha entre o tema claro ou escuro</span>
+                    <strong>{t("appearance.theme")}</strong>
+                    <span>{t("appearance.themeDescription")}</span>
                   </div>
                   <ThemeToggle />
                 </div>
+              </div>
+            )}
 
-                <div className={styles.comingSoon}>
-                  <p>
-                    🌍 <strong>Idioma</strong> - Em breve
-                  </p>
-                  <span>Adicione suporte para múltiplos idiomas</span>
-                </div>
+            {activeSection === "language" && (
+              <div className={styles.section}>
+                <h3>{t("settings.language")}</h3>
+                <p className={styles.sectionDescription}>
+                  {t("language.chooseLanguage")}
+                </p>
+
+                <LanguageSelector />
               </div>
             )}
           </div>

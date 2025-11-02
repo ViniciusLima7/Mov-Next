@@ -3,6 +3,7 @@
 import { useContext } from "react";
 import { ChallengesContext } from "../contexts/ChallengesContext";
 import { CountdownContext } from "../contexts/CountdownContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 
 import styles from "../styles/components/ChallengeBox.module.css";
 
@@ -10,6 +11,7 @@ export function ChallengeBox() {
   const { activeChallenge, reseteChallenge, completeChallenge } =
     useContext(ChallengesContext);
   const { resetCountdown } = useContext(CountdownContext);
+  const { t } = useContext(LanguageContext);
   function handleChallengeSucceeded() {
     completeChallenge();
     resetCountdown();
@@ -24,11 +26,16 @@ export function ChallengeBox() {
     <div className={styles.challengeBoxContainer}>
       {activeChallenge ? (
         <div className={styles.challengeBoxActive}>
-          <header>Ganhe {activeChallenge.amount} xp</header>
+          <header>
+            {t("challenges.earnXp", { amount: activeChallenge.amount })}
+          </header>
 
           <main>
-            <img src={`icons/${activeChallenge.type}.svg`} alt="Desafio" />
-            <strong>Novo Desafio</strong>
+            <img
+              src={`icons/${activeChallenge.type}.svg`}
+              alt={t("challenges.challengeAlt")}
+            />
+            <strong>{t("challenges.newChallenge")}</strong>
             <p>{activeChallenge.description}</p>
           </main>
           <footer>
@@ -37,23 +44,23 @@ export function ChallengeBox() {
               type="button"
               onClick={handleChallengeFailed}
             >
-              Falhei
+              {t("challenges.failed")}
             </button>
             <button
               className={styles.challengeBoxSucceededButton}
               type="button"
               onClick={handleChallengeSucceeded}
             >
-              Completei
+              {t("challenges.succeeded")}
             </button>
           </footer>
         </div>
       ) : (
         <div className={styles.challengeBoxNotActive}>
-          <strong>Finalize um ciclo para receber um desafio</strong>
+          <strong>{t("challenges.finishCycleToReceive")}</strong>
           <p>
             <img src="icons/level-up.svg" alt="Level Up"></img>
-            Avance de level completando desafios
+            {t("challenges.advanceLevel")}
           </p>
         </div>
       )}

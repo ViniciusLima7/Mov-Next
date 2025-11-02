@@ -2,12 +2,17 @@
 
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageSelector } from "./LanguageSelector";
 import styles from "../styles/components/ProfileSetupModal.module.css";
 
 export function ProfileSetupModal() {
   const { updateUser, completeSetup } = useContext(UserContext);
-  const [activeSection, setActiveSection] = useState<"profile" | "appearance">("profile");
+  const { t } = useContext(LanguageContext);
+  const [activeSection, setActiveSection] = useState<
+    "profile" | "appearance" | "language"
+  >("profile");
   const [name, setName] = useState("");
   const [githubUsername, setGithubUsername] = useState("");
   const [customUrl, setCustomUrl] = useState("");
@@ -31,7 +36,7 @@ export function ProfileSetupModal() {
 
   async function handleFetchGithubAvatar() {
     if (!githubUsername.trim()) {
-      setError("Digite um username do GitHub");
+      setError(t("errors.enterGithubUsername"));
       return;
     }
 
@@ -49,9 +54,7 @@ export function ProfileSetupModal() {
       if (response.status === 403 && rateLimitRemaining === "0") {
         const resetDate = new Date(Number(rateLimitReset) * 1000);
         const minutes = Math.ceil((resetDate.getTime() - Date.now()) / 60000);
-        setError(
-          `Limite da API atingido. Tente em ${minutes} min. Use a aba URL para continuar.`
-        );
+        setError(t("errors.githubRateLimit", { minutes: minutes.toString() }));
         setActiveTab("url");
         setAvatarUrl("");
         return;
@@ -66,7 +69,7 @@ export function ProfileSetupModal() {
       setAvatarUrl(githubAvatarUrl);
       setHasCustomAvatar(true);
     } catch (err) {
-      setError("Usuário do GitHub não encontrado");
+      setError(t("errors.githubUserNotFound"));
       setAvatarUrl("");
     } finally {
       setIsLoadingAvatar(false);
@@ -75,7 +78,7 @@ export function ProfileSetupModal() {
 
   function handleUseCustomUrl() {
     if (!customUrl.trim()) {
-      setError("Digite uma URL válida");
+      setError(t("errors.enterValidUrl"));
       return;
     }
     setError("");
@@ -86,9 +89,9 @@ export function ProfileSetupModal() {
   function handleImageError() {
     if (name.trim()) {
       setAvatarUrl(generateFallbackAvatar(name));
-      setError("URL inválida. Usando avatar com suas iniciais.");
+      setError(t("errors.invalidUrlUsingInitials"));
     } else {
-      setError("URL inválida. Digite seu nome para gerar um avatar.");
+      setError(t("errors.invalidUrlEnterName"));
       setAvatarUrl("");
     }
   }
@@ -97,7 +100,7 @@ export function ProfileSetupModal() {
     e.preventDefault();
 
     if (!name.trim()) {
-      setError("Por favor, digite seu nome");
+      setError(t("errors.enterYourName"));
       return;
     }
 
@@ -117,8 +120,8 @@ export function ProfileSetupModal() {
           <div className={styles.headerContent}>
             <img src="/favicon.png" alt="favicon" />
             <div>
-              <h2>Bem-vindo!</h2>
-              <p>Configure seu perfil para começar</p>
+              <h2>{t("setup.welcome")}</h2>
+              <p>{t("setup.subtitle")}</p>
             </div>
           </div>
         </div>
@@ -127,55 +130,62 @@ export function ProfileSetupModal() {
           {/* Sidebar Navigation */}
           <nav className={styles.sidebar}>
             <button
-              className={`${styles.navButton} ${activeSection === "profile" ? styles.active : ""}`}
+              className={`${styles.navButton} ${
+                activeSection === "profile" ? styles.active : ""
+              }`}
               onClick={() => setActiveSection("profile")}
               type="button"
             >
               <span className={styles.navIcon}>👤</span>
-              Perfil
+              {t("profile.title")}
             </button>
             <button
-              className={`${styles.navButton} ${activeSection === "appearance" ? styles.active : ""}`}
+              className={`${styles.navButton} ${
+                activeSection === "appearance" ? styles.active : ""
+              }`}
               onClick={() => setActiveSection("appearance")}
               type="button"
             >
               <span className={styles.navIcon}>🎨</span>
-              Aparência
+              {t("settings.appearance")}
             </button>
-            <div className={styles.navButtonDisabled}>
+            <button
+              className={`${styles.navButton} ${
+                activeSection === "language" ? styles.active : ""
+              }`}
+              onClick={() => setActiveSection("language")}
+              type="button"
+            >
               <span className={styles.navIcon}>🌍</span>
-              <span>
-                Idioma
-                <small>Em breve</small>
-              </span>
-            </div>
+              {t("settings.language")}
+            </button>
           </nav>
 
           {/* Main Content Area */}
           <div className={styles.mainContent}>
             {activeSection === "profile" && (
               <div className={styles.section}>
-                <h3>Seu Perfil</h3>
+                <h3>{t("profile.yourProfile")}</h3>
                 <p className={styles.sectionDescription}>
-                  Como você quer ser chamado?
+                  {t("profile.howToCall")}
                 </p>
 
                 <form onSubmit={handleSubmit}>
                   <div className={styles.inputGroup}>
-                    <label htmlFor="name">Nome</label>
+                    <label htmlFor="name">{t("profile.name")}</label>
                     <input
                       id="name"
                       type="text"
-                      placeholder="Digite seu nome"
+                      placeholder={t("profile.namePlaceholder")}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </div>
 
                   <div className={styles.inputGroup}>
-                    <label>Foto de perfil (opcional)</label>
+                    <label>{t("profile.profilePhoto")}</label>
                     <p className={styles.helpText}>
-                      💡 Sem foto? Usaremos suas iniciais
+                      {t("profile.profilePhotoHelp")}
                     </p>
 
                     <div className={styles.tabs}>
@@ -189,17 +199,19 @@ export function ProfileSetupModal() {
                           setError("");
                         }}
                       >
-                        GitHub
+                        {t("common.github")}
                       </button>
                       <button
                         type="button"
-                        className={activeTab === "url" ? styles.tabActive : styles.tab}
+                        className={
+                          activeTab === "url" ? styles.tabActive : styles.tab
+                        }
                         onClick={() => {
                           setActiveTab("url");
                           setError("");
                         }}
                       >
-                        URL
+                        {t("common.url")}
                       </button>
                     </div>
 
@@ -207,10 +219,12 @@ export function ProfileSetupModal() {
                       <div className={styles.githubInput}>
                         <input
                           type="text"
-                          placeholder="seu-username"
+                          placeholder={t("profile.usernamePlaceholder")}
                           value={githubUsername}
                           onChange={(e) => setGithubUsername(e.target.value)}
-                          onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && e.preventDefault()
+                          }
                         />
                         <button
                           type="button"
@@ -218,7 +232,9 @@ export function ProfileSetupModal() {
                           disabled={isLoadingAvatar}
                           className={styles.fetchButton}
                         >
-                          {isLoadingAvatar ? "Buscando..." : "Buscar"}
+                          {isLoadingAvatar
+                            ? t("common.searching")
+                            : t("common.search")}
                         </button>
                       </div>
                     )}
@@ -227,17 +243,19 @@ export function ProfileSetupModal() {
                       <div className={styles.githubInput}>
                         <input
                           type="url"
-                          placeholder="https://exemplo.com/foto.jpg"
+                          placeholder={t("profile.urlPlaceholder")}
                           value={customUrl}
                           onChange={(e) => setCustomUrl(e.target.value)}
-                          onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && e.preventDefault()
+                          }
                         />
                         <button
                           type="button"
                           onClick={handleUseCustomUrl}
                           className={styles.fetchButton}
                         >
-                          Usar
+                          {t("common.use")}
                         </button>
                       </div>
                     )}
@@ -245,8 +263,12 @@ export function ProfileSetupModal() {
 
                   {avatarUrl && (
                     <div className={styles.avatarPreview}>
-                      <img src={avatarUrl} alt="Preview" onError={handleImageError} />
-                      <span>✓ Avatar carregado!</span>
+                      <img
+                        src={avatarUrl}
+                        alt={t("profile.preview")}
+                        onError={handleImageError}
+                      />
+                      <span>{t("profile.avatarLoaded")}</span>
                     </div>
                   )}
 
@@ -257,7 +279,7 @@ export function ProfileSetupModal() {
                     className={styles.submitButton}
                     disabled={!name.trim()}
                   >
-                    Começar
+                    {t("common.start")}
                   </button>
                 </form>
               </div>
@@ -265,22 +287,22 @@ export function ProfileSetupModal() {
 
             {activeSection === "appearance" && (
               <div className={styles.section}>
-                <h3>Aparência</h3>
+                <h3>{t("settings.appearance")}</h3>
                 <p className={styles.sectionDescription}>
-                  Personalize a aparência da aplicação
+                  {t("settings.personalizeAppearance")}
                 </p>
 
                 <div className={styles.themeSection}>
                   <div className={styles.themeInfo}>
-                    <strong>Tema</strong>
-                    <span>Escolha entre o tema claro ou escuro</span>
+                    <strong>{t("appearance.theme")}</strong>
+                    <span>{t("appearance.themeDescription")}</span>
                   </div>
                   <ThemeToggle />
                 </div>
 
                 <div className={styles.appearanceNote}>
-                  <p>💡 <strong>Dica:</strong></p>
-                  <p>Você pode alterar essas configurações a qualquer momento clicando no ícone ⚙️ no seu perfil.</p>
+                  <p>{t("appearance.tip")}</p>
+                  <p>{t("appearance.tipDescription")}</p>
                 </div>
 
                 <button
@@ -288,7 +310,31 @@ export function ProfileSetupModal() {
                   className={styles.continueButton}
                   onClick={() => setActiveSection("profile")}
                 >
-                  ← Voltar ao Perfil
+                  {t("appearance.backToProfile")}
+                </button>
+              </div>
+            )}
+
+            {activeSection === "language" && (
+              <div className={styles.section}>
+                <h3>{t("settings.language")}</h3>
+                <p className={styles.sectionDescription}>
+                  {t("language.chooseLanguage")}
+                </p>
+
+                <LanguageSelector />
+
+                <div className={styles.appearanceNote}>
+                  <p>{t("appearance.tip")}</p>
+                  <p>{t("appearance.tipDescription")}</p>
+                </div>
+
+                <button
+                  type="button"
+                  className={styles.continueButton}
+                  onClick={() => setActiveSection("profile")}
+                >
+                  {t("appearance.backToProfile")}
                 </button>
               </div>
             )}

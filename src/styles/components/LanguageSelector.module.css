@@ -1,0 +1,61 @@
+.languageSelector {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.languageButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: var(--background);
+  border: 2px solid var(--gray-line);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.languageButton:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.languageButton.active {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.languageButton.active .name {
+  color: white;
+  font-weight: 600;
+}
+
+.flag {
+  font-size: 1.5rem;
+}
+
+.name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--title);
+  transition: color 0.2s;
+}
+
+@media (max-width: 768px) {
+  .languageButton {
+    min-width: 100px;
+    padding: 0.75rem 0.75rem;
+  }
+
+  .flag {
+    font-size: 1.25rem;
+  }
+
+  .name {
+    font-size: 0.85rem;
+  }
+}
