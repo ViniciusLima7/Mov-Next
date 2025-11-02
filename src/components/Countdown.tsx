@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CountdownContext } from "../contexts/CountdownContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import styles from "../styles/components/Countdown.module.css";
@@ -26,6 +26,37 @@ export function Countdown() {
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, "0").split("");
   const [secondLeft, secondRight] = String(seconds).padStart(2, "0").split("");
   const isTimerZero = minutes === 0 && seconds === 0;
+
+  // Atualiza o título da página com o timer
+  useEffect(() => {
+    const timeString = `${minuteLeft}${minuteRight}:${secondLeft}${secondRight}`;
+
+    if (isActive) {
+      if (isRestTime) {
+        const breakType = isLongBreak ? "☕" : "☕";
+        document.title = `${timeString} ${breakType} - Mov-Next`;
+      } else {
+        document.title = `${timeString} 🍅 - Mov-Next`;
+      }
+    } else {
+      document.title = "Mov-Next";
+    }
+
+    // Cleanup: restaura título original quando desmonta
+    return () => {
+      document.title = "Mov-Next";
+    };
+  }, [
+    minutes,
+    seconds,
+    isActive,
+    isRestTime,
+    isLongBreak,
+    minuteLeft,
+    minuteRight,
+    secondLeft,
+    secondRight,
+  ]);
 
   return (
     <div>
