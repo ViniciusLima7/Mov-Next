@@ -96,5 +96,9 @@
     "invalidUrlUsingInitials": "Invalid URL. Using avatar with your initials.",
     "invalidUrlEnterName": "Invalid URL. Enter your name to generate an avatar.",
     "enterYourName": "Please enter your name"
+  },
+  "footer": {
+    "copyright": "All rights reserved",
+    "developedBy": "Developed by V7-APPS"
   }
 }

@@ -7,6 +7,7 @@ import { Countdown } from "../components/Countdown";
 import { ExperienceBar } from "../components/ExperienceBar";
 import { Profile } from "../components/Profile";
 import { ProfileSetupModal } from "../components/ProfileSetupModal";
+import { Footer } from "../components/Footer";
 import { CountdownProvider } from "../contexts/CountdownContext";
 import { UserProvider } from "../contexts/UserContext";
 import { ThemeProvider } from "../contexts/ThemeContext";
@@ -48,6 +49,7 @@ function HomeContent() {
           </section>
         </CountdownProvider>
       </div>
+      <Footer />
     </>
   );
 }
