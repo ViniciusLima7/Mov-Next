@@ -9,6 +9,7 @@ import { Profile } from "../components/Profile";
 import { ProfileSetupModal } from "../components/ProfileSetupModal";
 import { CountdownProvider } from "../contexts/CountdownContext";
 import { UserProvider } from "../contexts/UserContext";
+import { ThemeProvider } from "../contexts/ThemeContext";
 import styles from "../styles/pages/Home.module.css";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 import { useContext } from "react";
@@ -56,14 +57,16 @@ export function HomeClient({
   challengesCompleted,
 }: HomeClientProps) {
   return (
-    <UserProvider>
-      <ChallengesProvider
-        level={level}
-        currentExperience={currentExperience}
-        challengesCompleted={challengesCompleted}
-      >
-        <HomeContent />
-      </ChallengesProvider>
-    </UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <ChallengesProvider
+          level={level}
+          currentExperience={currentExperience}
+          challengesCompleted={challengesCompleted}
+        >
+          <HomeContent />
+        </ChallengesProvider>
+      </UserProvider>
+    </ThemeProvider>
   );
 }

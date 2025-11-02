@@ -1,0 +1,32 @@
+"use client";
+
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
+import styles from "../styles/components/ThemeToggle.module.css";
+
+export function ThemeToggle() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button
+      className={styles.themeToggle}
+      onClick={toggleTheme}
+      title={
+        theme === "light" ? "Mudar para tema escuro" : "Mudar para tema claro"
+      }
+    >
+      <div className={styles.toggleTrack}>
+        <div
+          className={`${styles.toggleThumb} ${
+            theme === "dark" ? styles.dark : ""
+          }`}
+        >
+          {theme === "light" ? "☀️" : "🌙"}
+        </div>
+      </div>
+      <span className={styles.label}>
+        {theme === "light" ? "Claro" : "Escuro"}
+      </span>
+    </button>
+  );
+}
