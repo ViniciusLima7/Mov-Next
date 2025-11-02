@@ -100,6 +100,20 @@
   "footer": {
     "copyright": "Todos los derechos reservados",
     "developedBy": "Desarrollado por V7-APPS"
+  },
+  "challengeDescriptions": {
+    "stretch_arm_fingers": "Estire uno de sus brazos con la palma de la mano hacia adelante y tire de los dedos hacia arriba durante 10 segundos por mano.",
+    "stretch_arm_chest": "Estire su brazo contra el pecho y tire de él usando el otro brazo durante 10 segundos por brazo.",
+    "stretch_neck_sides": "Tire de su cuello con la ayuda de la mano hacia la derecha e izquierda, permaneciendo en la posición durante algunos segundos.",
+    "stretch_neck_back": "Con ambas manos en la parte posterior de la cabeza, llévela hacia abajo, estirando la parte posterior de la región.",
+    "stretch_legs_cross": "Cruce las piernas y baje con las manos estiradas hacia el suelo. Repita el movimiento con la otra pierna al frente.",
+    "stretch_legs_sitting": "Sentado, abra las piernas e intente tocar las palmas de las manos en el suelo, repita 3 veces durante 5 segundos.",
+    "stretch_knee_chest": "Tire de la rodilla hacia el pecho y sostenga, cambie de pierna después de 10 segundos.",
+    "stretch_sitting_twist": "Sentado, cruce una pierna e incline su tronco hacia adelante, cambie de pierna después de 10 segundos.",
+    "eye_palm_cover": "Sentado, cierre los ojos y cúbralos con las palmas de las manos durante 2 minutos, luego abra normalmente.",
+    "eye_look_far": "En un ambiente abierto, mire lo más lejos que pueda en cuatro direcciones durante 3s, mueva solo los ojos. Repita 3 veces.",
+    "eye_massage_brow": "Usando los pulgares, masajee el área debajo de las cejas en movimientos circulares durante 15 segundos.",
+    "stretch_waist_twist": "De pie, gire la cintura lo máximo que pueda hacia la izquierda, sostenga durante cinco segundos. Repita hacia la derecha."
   }
 }
 

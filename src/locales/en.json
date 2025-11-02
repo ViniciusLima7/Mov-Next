@@ -100,5 +100,19 @@
   "footer": {
     "copyright": "All rights reserved",
     "developedBy": "Developed by V7-APPS"
+  },
+  "challengeDescriptions": {
+    "stretch_arm_fingers": "Stretch one of your arms with your palm facing forward and pull your fingers up for 10 seconds per hand.",
+    "stretch_arm_chest": "Stretch your arm across your chest and pull it using your other arm for 10 seconds per arm.",
+    "stretch_neck_sides": "Pull your neck with the help of your hand to the right and left, holding the position for a few seconds.",
+    "stretch_neck_back": "With both hands on the back of your head, bring it down, stretching the back of the area.",
+    "stretch_legs_cross": "Cross your legs and go down with your hands stretched towards the floor. Repeat the movement with the other leg in front.",
+    "stretch_legs_sitting": "Sitting down, open your legs and try to touch your palms on the floor, repeat 3 times for 5 seconds.",
+    "stretch_knee_chest": "Pull your knee to your chest and hold, switch legs after 10 seconds.",
+    "stretch_sitting_twist": "Sitting down, cross one leg and lean your torso forward, switch legs after 10 seconds.",
+    "eye_palm_cover": "Sitting down, close your eyes and cover them with the palms of your hands for 2 minutes, then open normally.",
+    "eye_look_far": "In an open environment, look as far as you can in four directions for 3s, move only your eyes. Repeat 3 times.",
+    "eye_massage_brow": "Using your thumbs, massage the area below your eyebrows in circular motions for 15 seconds.",
+    "stretch_waist_twist": "Standing up, twist your waist as much as you can to the left, hold for five seconds. Repeat to the right."
   }
 }

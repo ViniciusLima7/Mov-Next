@@ -36,7 +36,7 @@ export function ChallengeBox() {
               alt={t("challenges.challengeAlt")}
             />
             <strong>{t("challenges.newChallenge")}</strong>
-            <p>{activeChallenge.description}</p>
+            <p>{t(`challengeDescriptions.${activeChallenge.id}`)}</p>
           </main>
           <footer>
             <button
