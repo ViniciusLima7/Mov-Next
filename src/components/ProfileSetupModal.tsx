@@ -118,7 +118,7 @@ export function ProfileSetupModal() {
       <div className={styles.modal}>
         <div className={styles.header}>
           <div className={styles.headerContent}>
-            <img src="/favicon.png" alt="favicon" />
+            <img src="/logo-fitpomo.svg" alt="FitPomo Logo" />
             <div>
               <h2>{t("setup.welcome")}</h2>
               <p>{t("setup.subtitle")}</p>
