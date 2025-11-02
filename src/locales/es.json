@@ -96,6 +96,10 @@
     "invalidUrlUsingInitials": "URL inválida. Usando avatar con sus iniciales.",
     "invalidUrlEnterName": "URL inválida. Ingrese su nombre para generar un avatar.",
     "enterYourName": "Por favor ingrese su nombre"
+  },
+  "footer": {
+    "copyright": "Todos los derechos reservados",
+    "developedBy": "Desarrollado por V7-APPS"
   }
 }
 
