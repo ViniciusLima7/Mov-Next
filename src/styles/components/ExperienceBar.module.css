@@ -9,7 +9,7 @@
 }
 .experienceBar > div {
   flex: 1;
-  height: 4px;
+  height: 8px;
   border-radius: 4px;
   background: var(--gray-line);
   margin: 0 1.5rem;
@@ -17,7 +17,7 @@
 }
 
 .experienceBar > div > div {
-  height: 4px;
+  height: 8px;
   border-radius: 4px;
   background: var(--green);
 }

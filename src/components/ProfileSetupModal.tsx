@@ -2,10 +2,12 @@
 
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { ThemeToggle } from "./ThemeToggle";
 import styles from "../styles/components/ProfileSetupModal.module.css";
 
 export function ProfileSetupModal() {
   const { updateUser, completeSetup } = useContext(UserContext);
+  const [activeSection, setActiveSection] = useState<"profile" | "appearance">("profile");
   const [name, setName] = useState("");
   const [githubUsername, setGithubUsername] = useState("");
   const [customUrl, setCustomUrl] = useState("");
@@ -110,114 +112,188 @@ export function ProfileSetupModal() {
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.container}>
-        <header>
-          <img src="/favicon.png" alt="favicon" />
-        </header>
-
-        <strong>Bem-vindo!</strong>
-        <p>Configure seu perfil para começar</p>
-
-        <form onSubmit={handleSubmit}>
-          <div className={styles.inputGroup}>
-            <label htmlFor="name">Seu nome</label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Digite seu nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label>Foto de perfil (opcional)</label>
-            <p className={styles.helpText}>
-              💡 Sem foto? Usaremos suas iniciais
-            </p>
-
-            <div className={styles.tabs}>
-              <button
-                type="button"
-                className={
-                  activeTab === "github" ? styles.tabActive : styles.tab
-                }
-                onClick={() => {
-                  setActiveTab("github");
-                  setError("");
-                }}
-              >
-                GitHub
-              </button>
-              <button
-                type="button"
-                className={activeTab === "url" ? styles.tabActive : styles.tab}
-                onClick={() => {
-                  setActiveTab("url");
-                  setError("");
-                }}
-              >
-                URL
-              </button>
+      <div className={styles.modal}>
+        <div className={styles.header}>
+          <div className={styles.headerContent}>
+            <img src="/favicon.png" alt="favicon" />
+            <div>
+              <h2>Bem-vindo!</h2>
+              <p>Configure seu perfil para começar</p>
             </div>
+          </div>
+        </div>
 
-            {activeTab === "github" && (
-              <div className={styles.githubInput}>
-                <input
-                  type="text"
-                  placeholder="seu-username"
-                  value={githubUsername}
-                  onChange={(e) => setGithubUsername(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
-                />
-                <button
-                  type="button"
-                  onClick={handleFetchGithubAvatar}
-                  disabled={isLoadingAvatar}
-                  className={styles.fetchButton}
-                >
-                  {isLoadingAvatar ? "Buscando..." : "Buscar"}
-                </button>
+        <div className={styles.content}>
+          {/* Sidebar Navigation */}
+          <nav className={styles.sidebar}>
+            <button
+              className={`${styles.navButton} ${activeSection === "profile" ? styles.active : ""}`}
+              onClick={() => setActiveSection("profile")}
+              type="button"
+            >
+              <span className={styles.navIcon}>👤</span>
+              Perfil
+            </button>
+            <button
+              className={`${styles.navButton} ${activeSection === "appearance" ? styles.active : ""}`}
+              onClick={() => setActiveSection("appearance")}
+              type="button"
+            >
+              <span className={styles.navIcon}>🎨</span>
+              Aparência
+            </button>
+            <div className={styles.navButtonDisabled}>
+              <span className={styles.navIcon}>🌍</span>
+              <span>
+                Idioma
+                <small>Em breve</small>
+              </span>
+            </div>
+          </nav>
+
+          {/* Main Content Area */}
+          <div className={styles.mainContent}>
+            {activeSection === "profile" && (
+              <div className={styles.section}>
+                <h3>Seu Perfil</h3>
+                <p className={styles.sectionDescription}>
+                  Como você quer ser chamado?
+                </p>
+
+                <form onSubmit={handleSubmit}>
+                  <div className={styles.inputGroup}>
+                    <label htmlFor="name">Nome</label>
+                    <input
+                      id="name"
+                      type="text"
+                      placeholder="Digite seu nome"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+
+                  <div className={styles.inputGroup}>
+                    <label>Foto de perfil (opcional)</label>
+                    <p className={styles.helpText}>
+                      💡 Sem foto? Usaremos suas iniciais
+                    </p>
+
+                    <div className={styles.tabs}>
+                      <button
+                        type="button"
+                        className={
+                          activeTab === "github" ? styles.tabActive : styles.tab
+                        }
+                        onClick={() => {
+                          setActiveTab("github");
+                          setError("");
+                        }}
+                      >
+                        GitHub
+                      </button>
+                      <button
+                        type="button"
+                        className={activeTab === "url" ? styles.tabActive : styles.tab}
+                        onClick={() => {
+                          setActiveTab("url");
+                          setError("");
+                        }}
+                      >
+                        URL
+                      </button>
+                    </div>
+
+                    {activeTab === "github" && (
+                      <div className={styles.githubInput}>
+                        <input
+                          type="text"
+                          placeholder="seu-username"
+                          value={githubUsername}
+                          onChange={(e) => setGithubUsername(e.target.value)}
+                          onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+                        />
+                        <button
+                          type="button"
+                          onClick={handleFetchGithubAvatar}
+                          disabled={isLoadingAvatar}
+                          className={styles.fetchButton}
+                        >
+                          {isLoadingAvatar ? "Buscando..." : "Buscar"}
+                        </button>
+                      </div>
+                    )}
+
+                    {activeTab === "url" && (
+                      <div className={styles.githubInput}>
+                        <input
+                          type="url"
+                          placeholder="https://exemplo.com/foto.jpg"
+                          value={customUrl}
+                          onChange={(e) => setCustomUrl(e.target.value)}
+                          onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+                        />
+                        <button
+                          type="button"
+                          onClick={handleUseCustomUrl}
+                          className={styles.fetchButton}
+                        >
+                          Usar
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {avatarUrl && (
+                    <div className={styles.avatarPreview}>
+                      <img src={avatarUrl} alt="Preview" onError={handleImageError} />
+                      <span>✓ Avatar carregado!</span>
+                    </div>
+                  )}
+
+                  {error && <p className={styles.error}>{error}</p>}
+
+                  <button
+                    type="submit"
+                    className={styles.submitButton}
+                    disabled={!name.trim()}
+                  >
+                    Começar
+                  </button>
+                </form>
               </div>
             )}
 
-            {activeTab === "url" && (
-              <div className={styles.githubInput}>
-                <input
-                  type="url"
-                  placeholder="https://exemplo.com/foto.jpg"
-                  value={customUrl}
-                  onChange={(e) => setCustomUrl(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
-                />
+            {activeSection === "appearance" && (
+              <div className={styles.section}>
+                <h3>Aparência</h3>
+                <p className={styles.sectionDescription}>
+                  Personalize a aparência da aplicação
+                </p>
+
+                <div className={styles.themeSection}>
+                  <div className={styles.themeInfo}>
+                    <strong>Tema</strong>
+                    <span>Escolha entre o tema claro ou escuro</span>
+                  </div>
+                  <ThemeToggle />
+                </div>
+
+                <div className={styles.appearanceNote}>
+                  <p>💡 <strong>Dica:</strong></p>
+                  <p>Você pode alterar essas configurações a qualquer momento clicando no ícone ⚙️ no seu perfil.</p>
+                </div>
+
                 <button
                   type="button"
-                  onClick={handleUseCustomUrl}
-                  className={styles.fetchButton}
+                  className={styles.continueButton}
+                  onClick={() => setActiveSection("profile")}
                 >
-                  Usar
+                  ← Voltar ao Perfil
                 </button>
               </div>
             )}
           </div>
-
-          {avatarUrl && (
-            <div className={styles.avatarPreview}>
-              <img src={avatarUrl} alt="Preview" onError={handleImageError} />
-              <span>✓ Avatar carregado!</span>
-            </div>
-          )}
-
-          {error && <p className={styles.error}>{error}</p>}
-
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={!name.trim()}
-          >
-            Começar
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
