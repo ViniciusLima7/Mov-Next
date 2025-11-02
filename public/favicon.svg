@@ -1,0 +1,27 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo quadrado com cantos arredondados -->
+  <rect width="128" height="128" rx="24" fill="#5965E0"/>
+  
+  <!-- Tomate (círculo principal - MENOR e ACIMA) -->
+  <circle cx="64" cy="50" r="32" fill="#E83F5B"/>
+  
+  <!-- Sombra do tomate -->
+  <ellipse cx="64" cy="58" rx="28" ry="20" fill="#D32F4B" opacity="0.3"/>
+  
+  <!-- Folhinha do tomate -->
+  <path d="M 58 23 Q 56 18, 58 15 Q 61 12, 63 15 L 64 18 L 65 15 Q 67 12, 70 15 Q 72 18, 70 23 Q 67 25, 64 24 Q 61 25, 58 23 Z" fill="#4CD62B"/>
+  
+  <!-- Brilho no tomate -->
+  <ellipse cx="72" cy="40" rx="12" ry="14" fill="white" opacity="0.3"/>
+  
+  <!-- Haltere ABAIXO - Barra central -->
+  <rect x="38" y="93" width="52" height="10" rx="5" fill="white"/>
+  
+  <!-- Haltere - Peso esquerdo -->
+  <rect x="28" y="85" width="16" height="26" rx="4" fill="white" opacity="0.9"/>
+  <rect x="31" y="88" width="10" height="20" rx="2" fill="white"/>
+  
+  <!-- Haltere - Peso direito -->
+  <rect x="84" y="85" width="16" height="26" rx="4" fill="white" opacity="0.9"/>
+  <rect x="87" y="88" width="10" height="20" rx="2" fill="white"/>
+</svg>

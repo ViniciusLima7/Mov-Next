@@ -1,0 +1,37 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tomate (círculo principal - MAIOR e ACIMA) -->
+  <circle cx="100" cy="70" r="55" fill="#E83F5B"/>
+  
+  <!-- Sombra do tomate -->
+  <ellipse cx="100" cy="82" rx="48" ry="34" fill="#D32F4B" opacity="0.3"/>
+  
+  <!-- Folhinha do tomate -->
+  <path d="M 88 22 Q 84 13, 88 8 Q 94 3, 98 8 L 100 13 L 102 8 Q 106 3, 112 8 Q 116 13, 112 22 Q 106 27, 100 25 Q 94 27, 88 22 Z" fill="#4CD62B"/>
+  
+  <!-- Nervura da folhinha -->
+  <line x1="100" y1="13" x2="100" y2="22" stroke="#3BA622" stroke-width="2"/>
+  
+  <!-- Brilho no tomate -->
+  <ellipse cx="115" cy="55" rx="20" ry="24" fill="white" opacity="0.25"/>
+  <ellipse cx="110" cy="50" rx="12" ry="16" fill="white" opacity="0.35"/>
+  
+  <!-- Haltere ABAIXO - Barra central -->
+  <rect x="50" y="155" width="100" height="16" rx="8" fill="#5965E0"/>
+  
+  <!-- Haltere - Peso esquerdo -->
+  <rect x="32" y="140" width="28" height="46" rx="6" fill="#4953B8"/>
+  <rect x="37" y="145" width="18" height="36" rx="4" fill="#5965E0"/>
+  
+  <!-- Haltere - Peso direito -->
+  <rect x="140" y="140" width="28" height="46" rx="6" fill="#4953B8"/>
+  <rect x="145" y="145" width="18" height="36" rx="4" fill="#5965E0"/>
+  
+  <!-- Detalhes dos pesos (linhas decorativas) -->
+  <line x1="42" y1="153" x2="52" y2="153" stroke="#4953B8" stroke-width="2" opacity="0.5"/>
+  <line x1="42" y1="163" x2="52" y2="163" stroke="#4953B8" stroke-width="2" opacity="0.5"/>
+  <line x1="42" y1="173" x2="52" y2="173" stroke="#4953B8" stroke-width="2" opacity="0.5"/>
+  
+  <line x1="148" y1="153" x2="158" y2="153" stroke="#4953B8" stroke-width="2" opacity="0.5"/>
+  <line x1="148" y1="163" x2="158" y2="163" stroke="#4953B8" stroke-width="2" opacity="0.5"/>
+  <line x1="148" y1="173" x2="158" y2="173" stroke="#4953B8" stroke-width="2" opacity="0.5"/>
+</svg>
