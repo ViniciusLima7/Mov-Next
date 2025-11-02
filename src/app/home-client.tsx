@@ -30,7 +30,7 @@ function HomeContent() {
       {isFirstVisit && <ProfileSetupModal />}
       <div className={styles.container}>
         <Head>
-          <title>Inicio | Mov-Next</title>
+          <title>FitPomo - Pomodoro Timer with Fitness Challenges</title>
         </Head>
         <ExperienceBar />
 
