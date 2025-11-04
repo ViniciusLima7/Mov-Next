@@ -11,7 +11,8 @@
     "continue": "Continuar",
     "start": "Comenzar",
     "loading": "Cargando...",
-    "searching": "Buscando..."
+    "searching": "Buscando...",
+    "pomodoro": "Pomodoro"
   },
   "theme": {
     "light": "Claro",
@@ -44,8 +45,24 @@
     "profile": "Perfil",
     "appearance": "Apariencia",
     "language": "Idioma",
+    "timer": "Temporizador",
     "personalizeInfo": "Personalice su información de perfil",
     "personalizeAppearance": "Personalice la apariencia de la aplicación"
+  },
+  "timer": {
+    "title": "Configuración del Temporizador",
+    "description": "Personalice sus tiempos de Pomodoro",
+    "workDuration": "Duración del Trabajo",
+    "shortBreak": "Pausa Corta",
+    "longBreak": "Pausa Larga",
+    "cyclesUntilLongBreak": "Ciclos Hasta Pausa Larga",
+    "minutes": "minutos",
+    "minute": "minuto",
+    "cycles": "ciclos",
+    "note": "💡 Nota:",
+    "noteDescription": "Los cambios se aplicarán en el próximo ciclo.",
+    "resetDefaults": "Restaurar Predeterminados",
+    "currentSettings": "Configuración Actual"
   },
   "appearance": {
     "theme": "Tema",

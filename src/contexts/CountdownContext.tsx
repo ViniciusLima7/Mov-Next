@@ -9,6 +9,7 @@ import {
   useRef,
 } from "react";
 import { ChallengesContext } from "./ChallengesContext";
+import { TimerSettingsContext } from "./TimerSettingsContext";
 
 interface CountdownContextData {
   minutes: number;
@@ -32,19 +33,49 @@ export const CountdownContext = createContext({} as CountdownContextData);
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge, activeChallenge, reseteChallenge } =
     useContext(ChallengesContext);
+  const {
+    workDuration,
+    shortBreakDuration,
+    longBreakDuration,
+    cyclesUntilLongBreak,
+  } = useContext(TimerSettingsContext);
 
-  const [time, setTime] = useState(25 * 60);
+  const [time, setTime] = useState(workDuration * 60);
   const [isActive, setIsActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
   const [isRestTime, setIsRestTime] = useState(false);
-  const [pomodoroCount, setPomodoroCount] = useState(0); // 0-4 pomodoros
+  const [pomodoroCount, setPomodoroCount] = useState(0);
   const [isLongBreak, setIsLongBreak] = useState(false);
 
   const startTimeRef = useRef<number>(0);
-  const durationRef = useRef<number>(25 * 60);
+  const durationRef = useRef<number>(workDuration * 60);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
+
+  // Atualiza o timer quando as configurações mudarem (se não estiver ativo)
+  useEffect(() => {
+    if (!isActive && !isRestTime) {
+      setTime(workDuration * 60);
+    }
+  }, [workDuration, isActive, isRestTime]);
+
+  // Atualiza o timer de pausa quando as configurações mudarem (se estiver em pausa mas não ativo)
+  useEffect(() => {
+    if (!isActive && isRestTime) {
+      if (isLongBreak) {
+        setTime(longBreakDuration * 60);
+      } else {
+        setTime(shortBreakDuration * 60);
+      }
+    }
+  }, [
+    shortBreakDuration,
+    longBreakDuration,
+    isActive,
+    isRestTime,
+    isLongBreak,
+  ]);
 
   function startCountdown() {
     if (activeChallenge) {
@@ -61,7 +92,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setHasFinished(false);
     setIsRestTime(false);
     setIsLongBreak(false);
-    setTime(25 * 60);
+    setTime(workDuration * 60);
   }
 
   function resetCountdownRest() {
@@ -69,20 +100,19 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setHasFinished(false);
     setIsRestTime(false);
     setIsLongBreak(false);
-    setTime(25 * 60);
+    setTime(workDuration * 60);
   }
 
   function startRestTime() {
     const newPomodoroCount = pomodoroCount + 1;
     setPomodoroCount(newPomodoroCount);
 
-    if (newPomodoroCount >= 4) {
+    if (newPomodoroCount >= cyclesUntilLongBreak) {
       setIsLongBreak(true);
-      setTime(15 * 60);
+      setTime(longBreakDuration * 60);
     } else {
-      // Pausa curta de 5 minutos
       setIsLongBreak(false);
-      setTime(5 * 60);
+      setTime(shortBreakDuration * 60);
     }
 
     setIsRestTime(true);
@@ -99,7 +129,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setIsRestTime(false);
     setIsLongBreak(false);
     setHasFinished(false);
-    setTime(25 * 60);
+    setTime(workDuration * 60);
     startNewChallenge();
   }
 
