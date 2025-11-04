@@ -12,6 +12,7 @@ import { CountdownProvider } from "../contexts/CountdownContext";
 import { UserProvider } from "../contexts/UserContext";
 import { ThemeProvider } from "../contexts/ThemeContext";
 import { LanguageProvider } from "../contexts/LanguageContext";
+import { TimerSettingsProvider } from "../contexts/TimerSettingsContext";
 import styles from "../styles/pages/Home.module.css";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 import { useContext } from "react";
@@ -62,15 +63,17 @@ export function HomeClient({
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <UserProvider>
-          <ChallengesProvider
-            level={level}
-            currentExperience={currentExperience}
-            challengesCompleted={challengesCompleted}
-          >
-            <HomeContent />
-          </ChallengesProvider>
-        </UserProvider>
+        <TimerSettingsProvider>
+          <UserProvider>
+            <ChallengesProvider
+              level={level}
+              currentExperience={currentExperience}
+              challengesCompleted={challengesCompleted}
+            >
+              <HomeContent />
+            </ChallengesProvider>
+          </UserProvider>
+        </TimerSettingsProvider>
       </ThemeProvider>
     </LanguageProvider>
   );

@@ -3,6 +3,7 @@
 import { useContext, useEffect } from "react";
 import { CountdownContext } from "../contexts/CountdownContext";
 import { LanguageContext } from "../contexts/LanguageContext";
+import { TimerSettingsContext } from "../contexts/TimerSettingsContext";
 import styles from "../styles/components/Countdown.module.css";
 
 export function Countdown() {
@@ -20,12 +21,19 @@ export function Countdown() {
   } = useContext(CountdownContext);
 
   const { t } = useContext(LanguageContext);
+  const { cyclesUntilLongBreak, shortBreakDuration, longBreakDuration } =
+    useContext(TimerSettingsContext);
 
   // --padstart ele verifica se tem duas variaveis e caso tenha menos que 2 vai colocar 0 na esquerda
   // --split divide a variavel por caractere se eu não colocar marcadador ele dividi cada um
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, "0").split("");
   const [secondLeft, secondRight] = String(seconds).padStart(2, "0").split("");
   const isTimerZero = minutes === 0 && seconds === 0;
+
+  // Helper para pluralização
+  const getMinuteText = (value: number) => {
+    return value === 1 ? t("timer.minute") : t("timer.minutes");
+  };
 
   // Atualiza o título da página com o timer
   useEffect(() => {
@@ -70,7 +78,7 @@ export function Countdown() {
             fontWeight: 600,
           }}
         >
-          {t("pomodoro.count", { count: pomodoroCount + 1 })}
+          🍅 {t("common.pomodoro")} {pomodoroCount + 1}/{cyclesUntilLongBreak}
         </div>
       )}
 
@@ -84,7 +92,13 @@ export function Countdown() {
             fontWeight: 600,
           }}
         >
-          {isLongBreak ? t("pomodoro.longBreak") : t("pomodoro.shortBreak")}
+          {isLongBreak
+            ? `☕ ${t("timer.longBreak")} (${longBreakDuration} ${getMinuteText(
+                longBreakDuration
+              )})`
+            : `☕ ${t(
+                "timer.shortBreak"
+              )} (${shortBreakDuration} ${getMinuteText(shortBreakDuration)})`}
         </div>
       )}
 

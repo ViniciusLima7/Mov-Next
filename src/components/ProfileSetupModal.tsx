@@ -5,13 +5,14 @@ import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSelector } from "./LanguageSelector";
+import { TimerSettings } from "./TimerSettings";
 import styles from "../styles/components/ProfileSetupModal.module.css";
 
 export function ProfileSetupModal() {
   const { updateUser, completeSetup } = useContext(UserContext);
   const { t } = useContext(LanguageContext);
   const [activeSection, setActiveSection] = useState<
-    "profile" | "appearance" | "language"
+    "profile" | "appearance" | "language" | "timer"
   >("profile");
   const [name, setName] = useState("");
   const [githubUsername, setGithubUsername] = useState("");
@@ -158,6 +159,16 @@ export function ProfileSetupModal() {
             >
               <span className={styles.navIcon}>🌍</span>
               {t("settings.language")}
+            </button>
+            <button
+              className={`${styles.navButton} ${
+                activeSection === "timer" ? styles.active : ""
+              }`}
+              onClick={() => setActiveSection("timer")}
+              type="button"
+            >
+              <span className={styles.navIcon}>⏱️</span>
+              {t("settings.timer")}
             </button>
           </nav>
 
@@ -323,6 +334,30 @@ export function ProfileSetupModal() {
                 </p>
 
                 <LanguageSelector />
+
+                <div className={styles.appearanceNote}>
+                  <p>{t("appearance.tip")}</p>
+                  <p>{t("appearance.tipDescription")}</p>
+                </div>
+
+                <button
+                  type="button"
+                  className={styles.continueButton}
+                  onClick={() => setActiveSection("profile")}
+                >
+                  {t("appearance.backToProfile")}
+                </button>
+              </div>
+            )}
+
+            {activeSection === "timer" && (
+              <div className={styles.section}>
+                <h3>{t("timer.title")}</h3>
+                <p className={styles.sectionDescription}>
+                  {t("timer.description")}
+                </p>
+
+                <TimerSettings />
 
                 <div className={styles.appearanceNote}>
                   <p>{t("appearance.tip")}</p>

@@ -5,6 +5,7 @@ import { UserContext } from "../contexts/UserContext";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSelector } from "./LanguageSelector";
+import { TimerSettings } from "./TimerSettings";
 import styles from "../styles/components/SettingsModal.module.css";
 
 interface SettingsModalProps {
@@ -17,7 +18,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     useContext(UserContext);
   const { t } = useContext(LanguageContext);
   const [activeSection, setActiveSection] = useState<
-    "profile" | "appearance" | "language"
+    "profile" | "appearance" | "language" | "timer"
   >("profile");
 
   // Profile states
@@ -190,6 +191,15 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               <span className={styles.navIcon}>🌍</span>
               {t("settings.language")}
             </button>
+            <button
+              className={`${styles.navButton} ${
+                activeSection === "timer" ? styles.active : ""
+              }`}
+              onClick={() => setActiveSection("timer")}
+            >
+              <span className={styles.navIcon}>⏱️</span>
+              {t("settings.timer")}
+            </button>
           </nav>
 
           {/* Main Content Area */}
@@ -325,6 +335,17 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </p>
 
                 <LanguageSelector />
+              </div>
+            )}
+
+            {activeSection === "timer" && (
+              <div className={styles.section}>
+                <h3>{t("timer.title")}</h3>
+                <p className={styles.sectionDescription}>
+                  {t("timer.description")}
+                </p>
+
+                <TimerSettings />
               </div>
             )}
           </div>

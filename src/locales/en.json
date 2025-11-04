@@ -11,7 +11,8 @@
     "continue": "Continue",
     "start": "Start",
     "loading": "Loading...",
-    "searching": "Searching..."
+    "searching": "Searching...",
+    "pomodoro": "Pomodoro"
   },
   "theme": {
     "light": "Light",
@@ -44,8 +45,24 @@
     "profile": "Profile",
     "appearance": "Appearance",
     "language": "Language",
+    "timer": "Timer",
     "personalizeInfo": "Personalize your profile information",
     "personalizeAppearance": "Customize the app appearance"
+  },
+  "timer": {
+    "title": "Timer Settings",
+    "description": "Customize your Pomodoro times",
+    "workDuration": "Work Duration",
+    "shortBreak": "Short Break",
+    "longBreak": "Long Break",
+    "cyclesUntilLongBreak": "Cycles Until Long Break",
+    "minutes": "minutes",
+    "minute": "minute",
+    "cycles": "cycles",
+    "note": "💡 Note:",
+    "noteDescription": "Changes will be applied on the next cycle.",
+    "resetDefaults": "Reset to Defaults",
+    "currentSettings": "Current Settings"
   },
   "appearance": {
     "theme": "Theme",
