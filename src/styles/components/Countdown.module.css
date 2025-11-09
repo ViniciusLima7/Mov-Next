@@ -78,3 +78,23 @@
   cursor: not-allowed;
   border: 2px solid var(--gray-line);
 }
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.buttonGroup .countdownButton {
+  flex: 1;
+  margin-top: 0;
+}
+
+.countdownButtonPause {
+  background: var(--orange);
+  color: #fff;
+}
+
+.countdownButtonPause:not(:disabled):hover {
+  background: var(--orange-dark);
+}

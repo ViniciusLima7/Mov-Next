@@ -13,11 +13,14 @@ export function Countdown() {
     hasFinished,
     isRestTime,
     isActive,
+    isPaused,
     pomodoroCount,
     isLongBreak,
     startCountdown,
     resetCountdown,
     resetCountdownRest,
+    pauseCountdown,
+    resumeCountdown,
   } = useContext(CountdownContext);
 
   const { t } = useContext(LanguageContext);
@@ -44,7 +47,9 @@ export function Countdown() {
         const breakType = isLongBreak ? "☕" : "☕";
         document.title = `${timeString} ${breakType} - FitPomo`;
       } else {
-        document.title = `${timeString} 🍅 - FitPomo`;
+        // Adiciona indicador de pausa se estiver pausado
+        const pauseIndicator = isPaused ? "⏸️ " : "🍅 ";
+        document.title = `${timeString} ${pauseIndicator}- FitPomo`;
       }
     } else {
       document.title = "FitPomo";
@@ -58,6 +63,7 @@ export function Countdown() {
     minutes,
     seconds,
     isActive,
+    isPaused,
     isRestTime,
     isLongBreak,
     minuteLeft,
@@ -136,13 +142,32 @@ export function Countdown() {
       ) : (
         <>
           {isActive ? (
-            <button
-              type="button"
-              className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
-              onClick={resetCountdown}
-            >
-              {t("pomodoro.abandonCycle")}
-            </button>
+            <div className={styles.buttonGroup}>
+              {isPaused ? (
+                <button
+                  type="button"
+                  className={styles.countdownButton}
+                  onClick={resumeCountdown}
+                >
+                  {t("pomodoro.resumeCycle")}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={`${styles.countdownButton} ${styles.countdownButtonPause}`}
+                  onClick={pauseCountdown}
+                >
+                  {t("pomodoro.pauseCycle")}
+                </button>
+              )}
+              <button
+                type="button"
+                className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+                onClick={resetCountdown}
+              >
+                {t("pomodoro.abandonCycle")}
+              </button>
+            </div>
           ) : (
             <button
               type="button"

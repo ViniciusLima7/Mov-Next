@@ -18,6 +18,8 @@
     --blue:  blue;
     --blue-dark:#4953B8;
     --blue-twitter: #2AA9E0;
+    --orange: #F97316;
+    --orange-dark: #EA580C;
 }
 
 [data-theme="dark"]{
@@ -32,6 +34,8 @@
     --blue:  #5965E0;
     --blue-dark:#4953B8;
     --blue-twitter: #2AA9E0;
+    --orange: #FB923C;
+    --orange-dark: #F97316;
 }
 body{
     background: var(--background);
