@@ -86,6 +86,8 @@
     "longBreak": "☕ Long Break (15 min)",
     "startCycle": "Start Cycle",
     "abandonCycle": "Abandon Cycle",
+    "pauseCycle": "Pause",
+    "resumeCycle": "Resume",
     "startShortBreak": "Start Short Break",
     "startLongBreak": "Start Long Break",
     "abandonBreak": "Abandon Break"

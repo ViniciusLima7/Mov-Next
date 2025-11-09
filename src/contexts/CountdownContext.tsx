@@ -17,11 +17,14 @@ interface CountdownContextData {
   hasFinished: boolean;
   isRestTime: boolean;
   isActive: boolean;
+  isPaused: boolean;
   pomodoroCount: number;
   isLongBreak: boolean;
   startCountdown: () => void;
   resetCountdown: () => void;
   resetCountdownRest: () => void;
+  pauseCountdown: () => void;
+  resumeCountdown: () => void;
 }
 
 interface CountdownProviderProps {
@@ -42,6 +45,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   const [time, setTime] = useState(workDuration * 60);
   const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
   const [isRestTime, setIsRestTime] = useState(false);
   const [pomodoroCount, setPomodoroCount] = useState(0);
@@ -85,10 +89,12 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     startTimeRef.current = Date.now();
     durationRef.current = time;
     setIsActive(true);
+    setIsPaused(false);
   }
 
   function resetCountdown() {
     setIsActive(false);
+    setIsPaused(false);
     setHasFinished(false);
     setIsRestTime(false);
     setIsLongBreak(false);
@@ -97,10 +103,28 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   function resetCountdownRest() {
     setIsActive(false);
+    setIsPaused(false);
     setHasFinished(false);
     setIsRestTime(false);
     setIsLongBreak(false);
     setTime(workDuration * 60);
+  }
+
+  function pauseCountdown() {
+    if (isActive && !isRestTime) {
+      setIsPaused(true);
+      // Salva o tempo restante exato no momento da pausa
+      durationRef.current = time;
+    }
+  }
+
+  function resumeCountdown() {
+    if (isPaused && !isRestTime) {
+      // Reinicia o contador a partir do tempo salvo
+      startTimeRef.current = Date.now();
+      durationRef.current = time;
+      setIsPaused(false);
+    }
   }
 
   function startRestTime() {
@@ -136,7 +160,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
 
-    if (isActive) {
+    if (isActive && !isPaused) {
       intervalId = setInterval(() => {
         const elapsedTime = Math.floor(
           (Date.now() - startTimeRef.current) / 1000
@@ -162,7 +186,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         clearInterval(intervalId);
       }
     };
-  }, [isActive, isRestTime]);
+  }, [isActive, isPaused, isRestTime]);
 
   return (
     <CountdownContext.Provider
@@ -172,11 +196,14 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         hasFinished,
         isRestTime,
         isActive,
+        isPaused,
         pomodoroCount,
         isLongBreak,
         startCountdown,
         resetCountdown,
         resetCountdownRest,
+        pauseCountdown,
+        resumeCountdown,
       }}
     >
       {children}
